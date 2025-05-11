@@ -15,7 +15,7 @@ const NavBar = () => {
   const langRef = useRef();
 
   useEffect(() => {
-    if (mobileMenuOpen) return; // Pas de changement de couleur en mode mobile
+    if (mobileMenuOpen) return;
 
     const navLinks = document.querySelectorAll('.NavBar .NavbarText a');
     const navBar = document.querySelector('.NavBar');
