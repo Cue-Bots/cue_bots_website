@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import * as THREE from "three";
 
 const CONFIG = {
-  rows: 40,
+  rows: 50,
   cols: 100,
   separation: 1.0,
   waveAmplitude: 0.9,

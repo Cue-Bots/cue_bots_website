@@ -1,52 +1,51 @@
 import React from 'react';
-import backContact from './assets/Contact.jpg';
 import './Contact.css';
 import HomeIcon from '@mui/icons-material/Home';
 import PhoneIcon from '@mui/icons-material/Phone';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import GitHubIcon from '@mui/icons-material/GitHub';
-
+import MailIcon from '@mui/icons-material/AlternateEmail';
 
 const Contact = () => {
-    return (
-        <div className='Contact'>
-            <p className='titreContact'>Contactez-moi</p>
-            <div className='info'>
-                <div className='info-item'>
-                    <MailOutlineIcon />
-                    <p>theotime.collier@epitech.eu</p>
-                </div>
-                <div className='info-item'>
-                    <PhoneIcon />
-                    <p>07 66 22 05 42</p>
-                </div>
-                <div className='info-item'>
-                    <HomeIcon />
-                    <p>54000 NANCY</p>
-                </div>
-            </div>
-            <div className='logo_info'>
-            <a 
-                href="https://www.linkedin.com/in/theotime-collier-7887962a3" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="linkedin-link"
-            >
-                <LinkedInIcon fontSize="large" />
-            </a>
-            <a 
-                href="=https://www.github.com/TheotimeCollier" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="github-link"
-            >
-                <GitHubIcon fontSize="large" />
-            </a>
-            </div>
-            <p className='copyright'>© Copyright 2025 - Theotime COLLIER. Tous droits réservés.</p>
+  return (
+    <footer className='Contact'>
+      {/* <div className='logo_info'>
+        <a href="https://www.linkedin.com/company/cue-bot" target="_blank" rel="noopener noreferrer" className="linkedin-link">
+          <LinkedInIcon fontSize="large" />
+        </a>
+        <a href="mailto:lucasfontana@cue-bots.com" target="_blank" rel="noopener noreferrer" className="Mail-link">
+          <MailIcon fontSize="large" />
+        </a>
+      </div> */}
+
+      <div className="footer-divider" />
+
+      <div className="footer-bottom">
+        <p className='footer-slogan'>we engineer innovation.</p>
+        <div className="footer-links">
+          <div>
+            <h4>Products</h4>
+            <p>Spherical Joint</p>
+            <p>Hexapod Kit</p>
+            <p>Rotative Base</p>
+          </div>
+          <div>
+            <h4>Technologies</h4>
+            <p>Actuators</p>
+            <p>AI Systems</p>
+            <p>Embedded Vision</p>
+          </div>
+          <div>
+            <h4>Company</h4>
+            <p>Team</p>
+            <p>Careers</p>
+            <p>Contact</p>
+          </div>
         </div>
-    );
+        <p className="copyright">© 2025 CUE BOTS — All rights reserved. | Nancy, France</p>
+      </div>
+    </footer>
+  );
 };
 
 export default Contact;

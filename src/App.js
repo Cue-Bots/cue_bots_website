@@ -1,16 +1,11 @@
 import './App.css';
-import NavBar from './components/nav_bar'
-import FirstPage from './components/fisrt_page'
-// import bgfisrt from './components/assets/background.png'
-// import ParticleBackground from './components/pointbg'
-// import ParticleField from './components/ParticleField';
+import NavBar from './components/nav_bar';
+import FirstPage from './components/fisrt_page';
 import WaveGrid from './components/WaveGrid';
-import Quisuisje from './components/Quisuisje'
-import NowState from './components/NowState'
-import CV from './components/CV'
-import Citation from './components/Citation';
-import Portefolio from './components/portefolio'
-import Contact from './components/Contact'
+import Describe from './components/describe';
+import Partner from './components/Partner';
+import Newletter from './components/Newletter';
+import Contact from './components/Contact';
 
 document.addEventListener('mousemove', (e) => {
   const x = (e.clientX / window.innerWidth - 0.5) * 10;
@@ -26,22 +21,30 @@ document.addEventListener('mousemove', (e) => {
 function App() {
   return (
     <div id="acceuil" className="App">
-      <header  className="App-header">
-        <NavBar></NavBar>
-        <FirstPage></FirstPage>
+      <header className="App-header">
+        <section className="section dark-bg">
+        <NavBar />
+        <FirstPage />
+        </section>
       </header>
       <div className="BackgroundWrapper">
-        {/* <img src={bgfisrt} alt="background" className="DynamicBackground"/> */}
-        <WaveGrid></WaveGrid>
+        <WaveGrid />
       </div>
-      <Quisuisje></Quisuisje>
-      <NowState></NowState>
-      <CV></CV>
-      <Citation></Citation>
-      <Portefolio></Portefolio>
-      <Contact></Contact>
+      <section className="section light-bg">
+        <Describe />
+      </section>
+      <section className="section dark-bg">
+        <Partner />
+      </section>
+      <section className="section dark-bg">
+        <Newletter />
+      </section>
+      <section className="section dark-bg">
+        <Contact />
+      </section>
     </div>
   );
 }
+
 
 export default App;

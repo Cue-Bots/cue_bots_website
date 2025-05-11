@@ -1,78 +1,57 @@
-.Contact {
-  position: relative;
-  background-image: url('./assets/Contact.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  color: white;
+.footer-divider {
+  width:50%;
+  height: 1px;
+  background-color: #333;
+  margin: 0px auto 30px auto;
+}
+
+.footer-bottom {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  color: #aaa;
+  font-size: 14px;
+  padding-top: 30px;
+  width: 100%;
+}
+
+.footer-slogan {
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 100px;
   justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.footer-links h4 {
+  color: white;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.footer-links p {
+  margin: 4px 0;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.footer-links p:hover {
+  color: white;
+}
+
+.Contact {
+  background-color: #0a0a0a;
+  color: white;
+  padding: 80px 40px 60px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 100px;
-  height: 200px;
-}
-
-.titreContact {
-  font-size: 30px;
-  font-weight: bold;
-  width: fit-content;
-  position: absolute;
-  top: -10px;
-}
-
-.info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 250px;
-  margin-left: -100px;
-  margin-top: 80px;
-}
-
-.info-item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  font-size: 16px;
-}
-
-.logo_info {
-  display: flex;
-  flex-direction: row;
-  gap: 50px;
-  margin-top: 40px;
-}
-
-.linkedin-link {
-  color: white;
-  margin-top: 20px;
-  transition: transform 0.2s ease-in-out;
-  transform: scale(1.5);
-}
-
-.linkedin-link:hover {
-  color: #0A66C2; 
-  transform: scale(1.7);
-}
-
-
-.github-link {
-  color: white;
-  margin-top: 20px;
-  transition: transform 0.2s ease-in-out;
-  transform: scale(1.5);
-}
-
-.github-link:hover {
-  color: #1f1f1f; 
-  transform: scale(1.7);
-}
-
-.copyright {
-  position: absolute;
-  bottom: 0px;
 }

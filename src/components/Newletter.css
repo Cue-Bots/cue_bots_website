@@ -1,0 +1,83 @@
+.NewletterSection {
+  background-color: #0a0a0a;
+  color: white;
+  padding: 80px 30px 0px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.NewletterContent {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.NewletterTitle {
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.NewletterForm {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.NewletterRow {
+  display: flex;
+  gap: 20px;
+}
+
+.NewletterRow input[type="text"],
+.NewletterRow input[type="email"] {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #555;
+  padding: 10px;
+  color: white;
+  font-size: 14px;
+}
+
+.NewletterRow input:focus {
+  outline: none;
+  border-bottom: 1px solid white;
+}
+
+.checkbox-row {
+  align-items: center;
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+.checkbox-row label {
+  margin-left: 8px;
+  font-size: 14px;
+}
+
+.NewletterSubmit {
+  align-self: flex-end;
+  padding: 10px 30px;
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.NewletterSubmit:hover {
+  background: white;
+  color: black;
+}
+
+.NewletterNote {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 15px;
+}

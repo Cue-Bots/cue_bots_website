@@ -1,94 +1,61 @@
+/* ===== STRUCTURE PRINCIPALE ===== */
 .NavBar {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    flex-wrap: wrap;
-}
-
-.NavBar a:hover {
-    color: gray;
-}
-
-.top-bar {
+  }
+  
+  .top-bar {
     width: 100%;
     height: 7px;
     background-color: white;
-}
-
-.LogoContainer {
+    z-index: -1;
+    filter: drop-shadow(0 5px 15px rgba(56, 56, 56, 0.2));
+  }
+  
+  /* ===== LOGOS ===== */
+  .LogoContainer {
     position: relative;
-    margin-left: -2px;
     width: 200px;
-    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.NavBarbgImg {
-    fill: white;
+    margin-left: -2px;
+  }
+  
+  .NavBarbgImg {
     position: absolute;
     top: 0;
     left: 0;
     width: 250%;
     height: auto;
-    z-index: 0;
-}
-
-.NavBarImg {
+    z-index: -1;
+    filter: drop-shadow(0 15px 15px rgba(56, 56, 56, 0.05));
+  }
+  
+  .NavBarImg {
     position: relative;
     width: 190px;
-    height: auto;
     margin-left: 70px;
-    margin-bottom: 10px;
-    z-index: 1;
+    margin-bottom: 20px;
     object-fit: contain;
-}
-
-/* .NavbarForm {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding-left: 250px;
-    padding-top: 5px;
-} */
-
-.cal-sans-regular {
-    font-family: "Cal Sans", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
+    z-index: 1;
+  }
+  
+  /* ===== FONT ===== */
+  @font-face {
     font-family: 'calsans';
     src: url('./assets/fonts/Cal_Sans/CalSans-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-}
-
-.NavbarText {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    margin-top: 20px;
-    gap: 35px;
-    transition: opacity 0.3s ease;
-}
-
-.NavbarText li a {
-    text-decoration: none;
-    color: white;
-    font-size: 15px;
-    transition: color 0.3s;
-    font-family: 'calsans', sans-serif;
-}
-
-
-.NavbarForm {
+  }
+  
+  /* ===== NAVIGATION PRINCIPALE ===== */
+  .NavbarForm {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -96,43 +63,193 @@
     padding: 5px 30px;
     gap: 20px;
     margin-left: 10%;
-}
-
-.NavbarLangWrapper {
+  }
+  
+  .NavbarText {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin-top: 20px;
+    gap: 35px;
+    transition: opacity 0.3s ease;
+  }
+  
+  .NavbarText li a {
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    transition: color 0.3s;
+    font-family: 'calsans', sans-serif;
+  }
+  
+  .NavBar a:hover {
+    color: gray;
+  }
+  
+  /* ===== LANGUE & BOUTON MENU ===== */
+  .NavbarLangWrapper {
     display: flex;
     align-items: center;
     margin-left: auto;
-}
-
-
-.NavbarLang {
+  }
+  
+  .NavbarLang {
     display: flex;
     list-style: none;
     gap: 10px;
-}
-
-.NavbarLang a {
+  }
+  
+  .NavbarLang a {
     text-decoration: none;
     color: white;
     font-size: 15px;
     font-family: 'calsans', sans-serif;
     transition: color 0.3s;
-}
-
-.MenuToggle a {
+  }
+  
+  .MenuToggle {
     margin-left: 15px;
     font-size: 15px;
     color: white;
     cursor: pointer;
-}
-
-/* 👇 Cacher le menu principal si trop étroit */
-@media (max-width: 1069px) {
-  .NavbarText {
-    display: none;
+  }
+  
+  /* ===== MENU DÉROULANT DESKTOP ===== */
+  .dropdown {
+    position: relative;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #111;
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 180px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .dropdown-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'calsans', sans-serif;
+  }
+  
+  .dropdown-menu a:hover {
+    color: #00C9A7;
+  }
+  
+  .dropdown-menu.hidden {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+  }
+  
+  /* ===== MENU MOBILE SLIDE ===== */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 260px;
+    background-color: #111;
+    padding: 100px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 2000;
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.3);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .mobile-menu.slide-in {
+    transform: translateX(0%);
+  }
+  
+  .mobile-menu.slide-out {
+    transform: translateX(100%);
+  }
+  
+  .mobile-menu-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .mobile-menu-close:hover {
+    color: #00C9A7;
+  }
+  
+  .mobile-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .mobile-menu ul li {
+    margin-bottom: 10px;
+  }
+  
+  .mobile-menu ul li a,
+  .mobile-dropdown-toggle {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'calsans', sans-serif;
+    padding: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .mobile-menu ul li .dropdown-menu {
+    padding-left: 15px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .mobile-menu ul li .dropdown-menu a {
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  
+  @media (max-width: 1069px) {
+    .NavbarText {
+      display: none;
+    }
+  
+    .MenuToggle {
+      display: block;
+    }
   }
 
-  .MenuToggle {
-    display: block;
+
+  .mobile-menu ul li .dropdown-menu {
+    all: unset;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    margin-top: 5px;
+    gap: 6px;
   }
-}
+  
+  .mobile-menu ul li .dropdown-menu a {
+    font-size: 14px;
+    opacity: 0.8;
+    color: white;
+    text-decoration: none;
+  }
+  

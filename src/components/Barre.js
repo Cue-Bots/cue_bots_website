@@ -1,5 +1,5 @@
 import React from 'react';
-import './CV.css';
+import './Partner.css';
 
 const Barre = ({ width, height }) => {
   return (
