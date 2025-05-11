@@ -1,0 +1,175 @@
+.CV {
+    height: 1150px;
+    background-color: white;
+}
+
+.CVText {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 30px;
+}
+
+.CVTitre {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.CVPara {
+    width: 600px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.Barre {
+    background-color: black;
+}
+
+.Langage {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.langageBas {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Langage {
+    width: 50%;
+}
+
+.logo {
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.logoImage {
+    width: 80px;
+    height: 80px;
+}
+
+.TitreLogo {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.CSS{
+    width: 60px;
+    height: 80px;
+    margin-left: 55px;
+}
+
+.JavaScript{
+    width: 155px;
+    height: 80px;
+    margin-left: 10px;
+}
+
+.ReactLogo{
+    width: 80;
+    height: 80px;
+}
+
+.Haskell {
+    width: 110px;
+    height: 80px;
+}
+
+.MySQL {
+    width: 80px;
+    height: 80px;
+}
+
+.Access {
+    width: 80px;
+    height: 80px;
+}
+
+.SQLServer {
+    width: 80px;
+    height: 80px;
+}
+
+.Unreal {
+    width: 180px;
+    height: 110px;
+}
+
+.langageBase {
+    width: 50%;
+    display: flex;
+    justify-content: row;
+    align-items: center;
+    gap: 150px;
+    padding-left: 200px;
+  }
+
+  .element1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 5px;
+  }
+
+  .element2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .element2 img {
+    margin-top: 10px;
+  }
+
+  .CVTheotime {
+    width: 500px;
+    height: auto;
+    border: 2px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.CVTheotime:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.3);
+  }
+
+.CVAndButton {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 50%;
+    height: 850px;
+    margin-top: -700px;
+}
+
+.ButtonCV {
+    margin-top: 30px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #323b4c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #191d26;
+}
+
+.ButtonCV:active {
+    background-color: #495d8a;
+    transform: scale(0.95);
+}

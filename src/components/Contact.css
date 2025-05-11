@@ -1,0 +1,78 @@
+.Contact {
+  position: relative;
+  background-image: url('./assets/Contact.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 100px;
+  height: 200px;
+}
+
+.titreContact {
+  font-size: 30px;
+  font-weight: bold;
+  width: fit-content;
+  position: absolute;
+  top: -10px;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 250px;
+  margin-left: -100px;
+  margin-top: 80px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.logo_info {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  margin-top: 40px;
+}
+
+.linkedin-link {
+  color: white;
+  margin-top: 20px;
+  transition: transform 0.2s ease-in-out;
+  transform: scale(1.5);
+}
+
+.linkedin-link:hover {
+  color: #0A66C2; 
+  transform: scale(1.7);
+}
+
+
+.github-link {
+  color: white;
+  margin-top: 20px;
+  transition: transform 0.2s ease-in-out;
+  transform: scale(1.5);
+}
+
+.github-link:hover {
+  color: #1f1f1f; 
+  transform: scale(1.7);
+}
+
+.copyright {
+  position: absolute;
+  bottom: 0px;
+}

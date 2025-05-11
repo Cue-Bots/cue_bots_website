@@ -1,0 +1,15 @@
+.Citation {
+    position: relative;
+    background-image: url('./assets/Background_montagne.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px;
+    height: 200px;
+  }

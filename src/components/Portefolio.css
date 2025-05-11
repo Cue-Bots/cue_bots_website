@@ -1,0 +1,26 @@
+.Portefolio {
+  top: 0;
+  width: 100%;
+  height: 500px;
+  background-color: white;
+}
+
+.Ligne_1 {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  margin-top: 25px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;      
+}
+
+.paragraphe {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 17px;
+}

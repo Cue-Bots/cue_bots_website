@@ -1,0 +1,25 @@
+.NowState {
+    position: relative;
+    background-image: url('./assets/pen.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px;
+  }
+
+  .NowState p {
+    position: relative;
+    z-index: 1;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .NowStatePhoto {
+    display: none;
+  }
