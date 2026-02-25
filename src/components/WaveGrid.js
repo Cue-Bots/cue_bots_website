@@ -103,10 +103,12 @@ const WaveGrid = () => {
     };
     animate();
 
+    const currentMount = mountRef.current;
+
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      if (mountRef.current) {
-        mountRef.current.removeChild(renderer.domElement);
+      if (currentMount) {
+        currentMount.removeChild(renderer.domElement);
       }
     };
   }, []);

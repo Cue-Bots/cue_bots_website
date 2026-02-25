@@ -6,7 +6,7 @@ import { faBarsStaggered, faChevronDown, faTimes } from '@fortawesome/free-solid
 import './nav_bar.css';
 
 const NavBar = () => {
-  const [hideMenu, setHideMenu] = useState(false);
+  const [hideMenu] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [openMobileDropdown, setOpenMobileDropdown] = useState(null);
