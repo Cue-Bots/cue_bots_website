@@ -11,7 +11,7 @@ const NavBar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [openMobileDropdown, setOpenMobileDropdown] = useState(null);
   const [menuIconColor, setMenuIconColor] = useState('white');
-  const [dropdownDark, setDropdownDark] = useState(true); // true = texte clair, false = texte foncé
+  const [dropdownDark, setDropdownDark] = useState(true);
   const [mobileDropdownDark, setMobileDropdownDark] = useState(true);
   const menuRef = useRef();
   const langRef = useRef();
@@ -39,7 +39,7 @@ const NavBar = () => {
       });
 
       setMenuIconColor(lightSection ? 'black' : 'white');
-      setDropdownDark(!lightSection); // Si light-bg, texte foncé
+      setDropdownDark(!lightSection);
       setMobileDropdownDark(!lightSection);
     };
 
@@ -50,6 +50,7 @@ const NavBar = () => {
     return () => {
       window.removeEventListener('scroll', getSectionUnderNav);
       window.removeEventListener('resize', getSectionUnderNav);
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
     };
   }, []);
 
@@ -70,6 +71,22 @@ const NavBar = () => {
     setTimeout(() => {
       setOpenDropdown(null);
     }, 400);
+  };
+  const closeTimerRef = useRef(null);
+
+  const handleMouseEnter = () => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = setTimeout(() => {
+      setOpenDropdown(null);
+      closeTimerRef.current = null;
+    }, 300);
   };
 
   const menuData = [
@@ -129,28 +146,32 @@ const NavBar = () => {
 
       <div className='NavbarForm'>
         <ul className={`NavbarText ${hideMenu ? 'is-hidden' : ''}`} ref={menuRef}>
-          {menuData.map((cat) => (
-            <li className='dropdown' key={cat.name} onMouseLeave={closeDropdownOnMouseLeave}>
-              <a href={`#${cat.name}`} onClick={(e) => { e.preventDefault(); toggleDropdown(cat.name); }}>
-                {cat.name} <FontAwesomeIcon icon={faChevronDown} />
-              </a>
-              {openDropdown === cat.name && (
-                <div className='dropdown-menu'>
-                  {/* Sous-catégories */}
-                  {cat.subcategories ? cat.subcategories.map(sub => (
-                    <div key={sub.name}>
-                      <div style={{fontWeight:'bold',marginTop:'5px', color: dropdownDark ? '#d2d2d2' : '#232526'}}>{sub.name}</div>
-                      {sub.options.map(opt => (
-                        <a key={opt.name} href={opt.href} style={{color: dropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
-                      ))}
-                    </div>
-                  )) : null}
-                  {/* Options directes */}
-                  {cat.options ? cat.options.map(opt => (
-                    <a key={opt.name} href={opt.href} style={{color: dropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
-                  )) : null}
-                </div>
-              )}
+              {menuData.map((cat) => (
+                <li className={`dropdown ${openDropdown === cat.name ? 'open' : ''}`} key={cat.name} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                  <span className="nav-bubble" aria-hidden="true"></span>
+                  <a
+                    href={`#${cat.name}`}
+                    className={`nav-link ${openDropdown === cat.name ? 'active' : ''}`}
+                    aria-expanded={openDropdown === cat.name}
+                    onClick={(e) => { e.preventDefault(); toggleDropdown(cat.name); }}
+                  >
+                    {cat.name} <FontAwesomeIcon icon={faChevronDown} />
+                  </a>
+
+                  <div className={`dropdown-menu ${openDropdown === cat.name ? 'visible' : 'hidden'}`}>
+                    {/* Sous-catégories */}
+                    {cat.subcategories ? cat.subcategories.map(sub => (
+                      <div key={sub.name} className="dropdown-column">
+                        <div className="subcategory-title" style={{color: dropdownDark ? '#d2d2d2' : '#232526'}}>{sub.name}</div>
+                        {sub.options.map(opt => (
+                          <a key={opt.name} className="dropdown-link" href={opt.href} style={{color: dropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
+                        ))}
+                      </div>
+                    )) : null}
+                    {cat.options ? cat.options.map(opt => (
+                      <a key={opt.name} className="dropdown-link" href={opt.href} style={{color: dropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
+                    )) : null}
+                  </div>
             </li>
           ))}
           <li><a href="#about" style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>About us</a></li>
@@ -179,23 +200,21 @@ const NavBar = () => {
                 <span style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{cat.name}</span>
                 <FontAwesomeIcon icon={faChevronDown} style={{color: mobileDropdownDark ? '#fff' : '#232526'}} />
               </div>
-              {openMobileDropdown === cat.name && (
-                <ul className="dropdown-menu">
-                  {/* Sous-catégories */}
-                  {cat.subcategories ? cat.subcategories.map(sub => (
-                    <li key={sub.name}>
-                      <div style={{fontWeight:'bold',marginTop:'5px', color: mobileDropdownDark ? '#d2d2d2' : '#232526'}}>{sub.name}</div>
-                      {sub.options.map(opt => (
-                        <a key={opt.name} href={opt.href} style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
-                      ))}
-                    </li>
-                  )) : null}
-                  {/* Options directes */}
-                  {cat.options ? cat.options.map(opt => (
-                    <li key={opt.name}><a href={opt.href} style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{opt.name}</a></li>
-                  )) : null}
-                </ul>
-              )}
+              <ul className={`dropdown-menu ${openMobileDropdown === cat.name ? 'visible' : 'hidden'}`}>
+                {/* Sous-catégories */}
+                {cat.subcategories ? cat.subcategories.map(sub => (
+                  <li key={sub.name} className="dropdown-column">
+                    <div className="subcategory-title" style={{color: mobileDropdownDark ? '#d2d2d2' : '#232526'}}>{sub.name}</div>
+                    {sub.options.map(opt => (
+                      <a key={opt.name} className="dropdown-link" href={opt.href} style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
+                    ))}
+                  </li>
+                )) : null}
+                {/* Options directes */}
+                {cat.options ? cat.options.map(opt => (
+                  <li key={opt.name}><a className="dropdown-link" href={opt.href} style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{opt.name}</a></li>
+                )) : null}
+              </ul>
             </li>
           ))}
           <li><a href="#about" style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>About us</a></li>

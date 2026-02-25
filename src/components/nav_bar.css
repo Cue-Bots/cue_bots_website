@@ -82,10 +82,20 @@
     transition: color 0.3s;
     font-family: 'calsans', sans-serif;
   }
-  
-  .NavBar a:hover {
-    color: gray;
-  }
+
+    /* Button appearance for links (no colored underline) */
+    .NavbarText li a {
+      position: relative;
+      padding: 8px 10px;
+      border-radius: 9px;
+      transition: color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+      will-change: transform;
+    }
+
+    .NavbarText li a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
   
   /* ===== LANGUE & BOUTON MENU ===== */
   .NavbarLangWrapper {
@@ -123,8 +133,8 @@
   .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     /*background: linear-gradient(135deg, #232526 0%, #414345 10%);*/
     
 
@@ -137,17 +147,101 @@
     overflow: hidden;
 
 
-    padding: 18px 16px;
-    border-radius: 16px;
-    min-width: 220px;
-    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    padding: 20px 16px;
+    border-radius: 14px;
+    min-width: 260px;
+    box-shadow: 0 18px 48px rgba(0,0,0,0.28);
     z-index: 1001;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    transition: opacity 0.3s, transform 0.3s;
-    border: 1px solid #000000;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    transition: opacity 0.28s ease, transform 0.28s ease;
+    border: 1px solid rgba(255,255,255,0.06);
     font-family: 'calsans', sans-serif;
+  }
+
+  /* Liquid glass bubble and expansion animation */
+  .NavbarText .dropdown {
+    position: relative;
+  }
+
+  .NavbarText .nav-link {
+    position: relative;
+    z-index: 12; /* make sure text stays above the bubble */
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 12px;
+  }
+
+  /* force all link children (text + icon) to render above the bubble */
+  .NavbarText .nav-link, .NavbarText .nav-link * {
+    position: relative;
+    z-index: 20;
+  }
+
+  /* bubble element placed before the link in the DOM so we can guarantee stacking */
+  .nav-bubble {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 6px;
+    width: 140%;
+    height: 40px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.26), inset 0 1px 0 rgba(255,255,255,0.03);
+    transition: height 0.36s cubic-bezier(.2,.9,.2,1), bottom 0.36s, opacity 0.28s;
+    z-index: 4; /* below the text link which has z-index 6 */
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  /* hover shows a subtle bubble under the text */
+  .NavbarText .dropdown:hover .nav-bubble {
+    opacity: 1;
+    height: 52px;
+    bottom: 4px;
+  }
+
+  /* when open, bubble expands downward to reveal the menu but stay rounded */
+  .NavbarText .dropdown.open .nav-bubble {
+    opacity: 1;
+    height: 260px; /* reduced from 360 */
+    bottom: -210px; /* moves the bubble downward instead of stretching only */
+    border-radius: 28px;
+  }
+
+  /* position and animate dropdown relative to bubble */
+  .NavbarText .dropdown .dropdown-menu {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, 10px) scale(0.98);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.32s ease, transform 0.32s ease;
+    z-index: 11; /* below nav-link text but above page */
+    background: transparent; /* bubble provides background visual */
+    border: none;
+    box-shadow: none;
+    min-width: 320px;
+  }
+
+  .NavbarText .dropdown .dropdown-menu.visible {
+    opacity: 1;
+    transform: translate(-50%, 6px) scale(1);
+    pointer-events: auto;
+  }
+
+  /* inner container keeps the glass style and border inside the expanded bubble */
+  .NavbarText .dropdown .dropdown-menu > * {
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.22);
+    border: 1px solid rgba(255,255,255,0.06);
   }
   
   
@@ -167,10 +261,11 @@
   
   
   .dropdown-menu a:hover {
-    background: #000000;
-    color: #232526;
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    color: #fff;
+    transform: translateY(-2px);
     font-weight: 600;
-    text-shadow: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.18);
   }
   
   
@@ -181,17 +276,34 @@
   }
   /* Sous-catégorie desktop */
   .dropdown-menu .subcategory-title {
-    color: #000000;
+    color: #dcdcdc;
     font-size: 13px;
     font-weight: 700;
-    margin: 8px 0 4px 0;
+    margin: 0 0 6px 0;
     letter-spacing: 0.04em;
     padding-left: 2px;
   }
   .dropdown-menu .subcategory-options {
     margin-bottom: 8px;
     padding-left: 8px;
-    border-left: 2px solid #000000;
+    border-left: 2px solid rgba(255,255,255,0.04);
+  }
+
+  /* Column wrapper inside dropdown */
+  .dropdown-column {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .dropdown-link {
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: background 0.18s ease, transform 0.12s ease;
+  }
+
+  .dropdown-link:hover {
+    background: rgba(255,255,255,0.06);
   }
   
   
@@ -274,10 +386,10 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background: linear-gradient(135deg, #232526 0%, #414345 100%);
+    background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.28));
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-    border: 1px solid #000000;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+    border: 1px solid rgba(0,0,0,0.35);
     font-family: 'calsans', sans-serif;
     padding-bottom: 12px;
   }
@@ -296,8 +408,8 @@
     letter-spacing: 0.02em;
   }
   .mobile-menu ul li .dropdown-menu a:hover {
-    background: #000000;
-    color: #232526;
+    background: rgba(255,255,255,0.06);
+    color: #fff;
     font-weight: 600;
   }
   /* Sous-catégorie mobile */
@@ -475,5 +587,23 @@
     opacity: 0.8;
     color: white;
     text-decoration: none;
+  }
+
+  /* mobile dropdown show/hide animations when class toggled */
+  .mobile-menu .dropdown-menu.hidden {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    overflow: hidden;
+    transition: max-height 0.28s ease, opacity 0.28s ease, transform 0.28s ease;
+  }
+
+  .mobile-menu .dropdown-menu.visible {
+    max-height: 800px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition: max-height 0.34s ease, opacity 0.28s ease, transform 0.28s ease;
   }
   
