@@ -11,13 +11,14 @@ const NavBar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [openMobileDropdown, setOpenMobileDropdown] = useState(null);
   const [menuIconColor, setMenuIconColor] = useState('white');
+  const [dropdownDark, setDropdownDark] = useState(true); // true = texte clair, false = texte foncé
+  const [mobileDropdownDark, setMobileDropdownDark] = useState(true);
   const menuRef = useRef();
   const langRef = useRef();
 
   useEffect(() => {
-    if (mobileMenuOpen) return;
-
     const navLinks = document.querySelectorAll('.NavBar .NavbarText a');
+    const navLang = document.querySelectorAll('.NavbarLangWrapper a');
     const navBar = document.querySelector('.NavBar');
 
     const getSectionUnderNav = () => {
@@ -33,7 +34,13 @@ const NavBar = () => {
         link.style.color = lightSection ? 'black' : darkSection ? 'white' : '';
       });
 
+      navLang.forEach(link => {
+        link.style.color = lightSection ? 'black' : darkSection ? 'white' : '';
+      });
+
       setMenuIconColor(lightSection ? 'black' : 'white');
+      setDropdownDark(!lightSection); // Si light-bg, texte foncé
+      setMobileDropdownDark(!lightSection);
     };
 
     getSectionUnderNav();
@@ -44,7 +51,7 @@ const NavBar = () => {
       window.removeEventListener('scroll', getSectionUnderNav);
       window.removeEventListener('resize', getSectionUnderNav);
     };
-  }, [mobileMenuOpen]);
+  }, []);
 
   const toggleDropdown = (item) => {
     setOpenDropdown(prev => (prev === item ? null : item));
@@ -73,14 +80,13 @@ const NavBar = () => {
           name: 'Hardware',
           options: [
             { name: 'Robots', href: '#products-hardware-robots' },
-            { name: 'Moteurs', href: '#products-hardware-moteurs' }
+            { name: 'motors', href: '#products-hardware-motors' }
           ]
         },
         {
           name: 'Software',
           options: [
             { name: 'Logiciel', href: '#products-software-logiciel' },
-            { name: 'Applications', href: '#products-software-applications' }
           ]
         }
       ]
@@ -107,8 +113,8 @@ const NavBar = () => {
     {
       name: 'Socials',
       options: [
-        { name: 'Instagram', href: '#socials-instagram' },
-        { name: 'LinkedIn', href: '#socials-linkedin' }
+        { name: 'LinkedIn', href: '#socials-linkedin' },
+        { name: 'Instagram', href: '#socials-instagram' }
       ]
     }
   ];
@@ -133,22 +139,22 @@ const NavBar = () => {
                   {/* Sous-catégories */}
                   {cat.subcategories ? cat.subcategories.map(sub => (
                     <div key={sub.name}>
-                      <div style={{fontWeight:'bold',marginTop:'5px', color:'#d2d2d2'}}>{sub.name}</div>
+                      <div style={{fontWeight:'bold',marginTop:'5px', color: dropdownDark ? '#d2d2d2' : '#232526'}}>{sub.name}</div>
                       {sub.options.map(opt => (
-                        <a key={opt.name} href={opt.href}>{opt.name}</a>
+                        <a key={opt.name} href={opt.href} style={{color: dropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
                       ))}
                     </div>
                   )) : null}
                   {/* Options directes */}
                   {cat.options ? cat.options.map(opt => (
-                    <a key={opt.name} href={opt.href}>{opt.name}</a>
+                    <a key={opt.name} href={opt.href} style={{color: dropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
                   )) : null}
                 </div>
               )}
             </li>
           ))}
-          <li><a href="#about">About us</a></li>
-          <li><a href="#contact">Contact us</a></li>
+          <li><a href="#about" style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>About us</a></li>
+          <li><a href="#contact" style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>Contact us</a></li>
         </ul>
 
         <div className='NavbarLangWrapper' ref={langRef}>
@@ -170,30 +176,30 @@ const NavBar = () => {
           {menuData.map((cat) => (
             <li key={cat.name}>
               <div className="mobile-dropdown-toggle" onClick={() => toggleMobileDropdown(cat.name)}>
-                <span>{cat.name}</span>
-                <FontAwesomeIcon icon={faChevronDown} />
+                <span style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{cat.name}</span>
+                <FontAwesomeIcon icon={faChevronDown} style={{color: mobileDropdownDark ? '#fff' : '#232526'}} />
               </div>
               {openMobileDropdown === cat.name && (
                 <ul className="dropdown-menu">
                   {/* Sous-catégories */}
                   {cat.subcategories ? cat.subcategories.map(sub => (
                     <li key={sub.name}>
-                      <div style={{fontWeight:'bold',marginTop:'5px'}}>{sub.name}</div>
+                      <div style={{fontWeight:'bold',marginTop:'5px', color: mobileDropdownDark ? '#d2d2d2' : '#232526'}}>{sub.name}</div>
                       {sub.options.map(opt => (
-                        <a key={opt.name} href={opt.href}>{opt.name}</a>
+                        <a key={opt.name} href={opt.href} style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
                       ))}
                     </li>
                   )) : null}
                   {/* Options directes */}
                   {cat.options ? cat.options.map(opt => (
-                    <li key={opt.name}><a href={opt.href}>{opt.name}</a></li>
+                    <li key={opt.name}><a href={opt.href} style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{opt.name}</a></li>
                   )) : null}
                 </ul>
               )}
             </li>
           ))}
-          <li><a href="#about">About us</a></li>
-          <li><a href="#contact">Contact us</a></li>
+          <li><a href="#about" style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>About us</a></li>
+          <li><a href="#contact" style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>Contact us</a></li>
         </ul>
       </div>
     </div>
