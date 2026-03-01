@@ -1,0 +1,34 @@
+html {
+  scroll-behavior: smooth;
+}
+
+
+.BGFirst {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.BackgroundWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.DynamicBackground {
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  transform: translate(-5%, -5%);
+  transition: transform 0.1s ease-out;
+  pointer-events: none;
+}
