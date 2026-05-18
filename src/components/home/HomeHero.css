@@ -7,7 +7,7 @@
   --homehero-muted: rgba(255, 255, 255, 0.56);
   --homehero-soft: rgba(255, 255, 255, 0.4);
   --homehero-border: rgba(255, 255, 255, 0.12);
-  background-image: url('../assets/Background_montagne.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.178), rgba(0, 0, 0, 0.274)),url('../assets/Background_montagne.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -84,20 +84,12 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-.homehero-visual-wrap {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  min-height: 90vh;
-}
-
-.homehero-glow {
+/* .homehero-glow {
   position: absolute;
   inset: 8% 10%;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 60%);
   filter: blur(60px);
-}
+} */
 
 .homehero-image {
   display: block;
@@ -194,6 +186,20 @@
   .homehero-grid {
     grid-template-columns: 1fr;
   }
+
+  .homehero-image {
+    /* visibility: hidden; */
+  }
+}
+
+@media (min-width: 768px) {
+  .homehero-visual-wrap {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 10vh;
+}
 }
 
 @media (max-width: 768px) {
@@ -201,16 +207,15 @@
     width: min(1120px, calc(100% - 28px));
   }
 
-  .homehero-visual-wrap {
-    height: 70vh;
-    min-height: 500px;
-  }
-
   .homehero-image {
     height: 70vh;
     max-height: 500px;
     max-width: 100%;
     transform: scale(1.02);
+  }
+
+  .homehero-lead {
+    max-width: 70%;
   }
 
   .homehero-panel-bottom {

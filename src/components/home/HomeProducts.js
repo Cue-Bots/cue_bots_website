@@ -1,21 +1,25 @@
 import './HomeProducts.css';
+import { ShoppingCart, Settings, BatteryChargingFull } from '@mui/icons-material';
 
 const products = [
   {
     title: 'Cue Arm 360',
     subtitle: 'Robotic Arm',
+    icon: ShoppingCart,
     image:
       'https://images.unsplash.com/photo-1561144257-e32e8efc6c4f?q=80&w=1600&auto=format&fit=crop',
   },
   {
     title: 'A360 Core',
     subtitle: 'Articulation Module',
+    icon: Settings,
     image:
       'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1600&auto=format&fit=crop',
   },
   {
     title: 'Dock One',
     subtitle: 'Charging Station',
+    icon: BatteryChargingFull,
     image:
       'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop',
   },
@@ -48,6 +52,7 @@ export default function HomeProducts() {
               </div>
               <div className="home-product-body">
                 <div>
+                  <product.icon sx={{ fontSize: 32, marginBottom: '8px', color: '#00d9ff' }} />
                   <h3>{product.title}</h3>
                   <p>{product.subtitle}</p>
                 </div>

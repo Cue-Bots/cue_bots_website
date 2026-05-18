@@ -1,4 +1,5 @@
 import './HomeTechnology.css';
+import { CheckCircle } from '@mui/icons-material';
 
 const features = [
   'Ultra-compact motor architecture',
@@ -27,7 +28,7 @@ export default function HomeTechnology() {
           <div className="home-feature-list">
             {features.map((item) => (
               <div key={item} className="home-feature-item">
-                <span className="home-dot" />
+                <CheckCircle sx={{ fontSize: 20, marginRight: '10px', color: '#00d9ff', flexShrink: 0 }} />
                 <span>{item}</span>
               </div>
             ))}

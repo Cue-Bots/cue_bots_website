@@ -1,7 +1,6 @@
 import './HomeNavbar.css';
 import logo from '../assets/logo_line.png';
 
-
 export default function HomeNavbar() {
   return (
     <header className="home-navbar">

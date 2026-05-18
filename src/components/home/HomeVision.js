@@ -1,6 +1,12 @@
 import './HomeVision.css';
+import { Straighten, AcUnit, Palette, AutoAwesome } from '@mui/icons-material';
 
-const values = ['Precision', 'Fluidity', 'Industrial Elegance', 'Innovation'];
+const values = [
+  { label: 'Precision', icon: Straighten },
+  { label: 'Fluidity', icon: AcUnit },
+  { label: 'Industrial Elegance', icon: Palette },
+  { label: 'Innovation', icon: AutoAwesome }
+];
 
 export default function HomeVision() {
   return (
@@ -19,11 +25,15 @@ export default function HomeVision() {
         </p>
 
         <div className="home-tags">
-          {values.map((item) => (
-            <span key={item} className="home-tag">
-              {item}
-            </span>
-          ))}
+          {values.map((item) => {
+            const Icon = item.icon;
+            return (
+              <span key={item.label} className="home-tag">
+                <Icon sx={{ fontSize: 16, marginRight: '6px' }} />
+                {item.label}
+              </span>
+            );
+          })}
         </div>
       </div>
     </section>

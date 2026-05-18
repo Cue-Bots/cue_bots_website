@@ -57,11 +57,9 @@ export default function HomeHero() {
           <p className="homehero-kicker">Engineered Motion</p>
 
           <h1 className="homehero-title">
-            Where motion
+            MOTION.
             <br />
-            becomes
-            <br />
-            natural.
+            &nbsp;&nbsp;&nbsp;REFINED.
           </h1>
 
           <p className="homehero-lead">
