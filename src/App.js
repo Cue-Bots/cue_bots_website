@@ -54,19 +54,19 @@ import BuildPage from './pages/BuildPage';
 
 // export default App;
 
-function getRoute() {
-  return window.location.pathname || '/';
-}
+// function getRoute() {
+//   return window.location.pathname || '/';
+// }
 
 function App() {
-  const [route, setRoute] = useState(getRoute);
+  // const [route, setRoute] = useState(getRoute);
 
-  useEffect(() => {
-    const onPopState = () => setRoute(getRoute());
+  // useEffect(() => {
+  //   const onPopState = () => setRoute(getRoute());
 
-    window.addEventListener('popstate', onPopState);
-    return () => window.removeEventListener('popstate', onPopState);
-  }, []);
+  //   window.addEventListener('popstate', onPopState);
+  //   return () => window.removeEventListener('popstate', onPopState);
+  // }, []);
 
   // if (route === '/old') {
   //   return <OldPage />;
