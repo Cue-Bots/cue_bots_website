@@ -22,7 +22,7 @@ export default function HomeContact() {
             </div>
 
             <form className="home-contact-form" onSubmit={(e) => e.preventDefault()}>
-              <Email sx={{ fontSize: 20, marginRight: '8px', color: '#00d9ff' }} />
+              {/* <Email sx={{ fontSize: 20, marginRight: '8px', color: '#00d9ff' }} /> */}
               <input type="email" placeholder="Your email" aria-label="Your email" />
               <button className="home-btn home-btn-solid" type="submit">
                 <Send sx={{ fontSize: 18, marginRight: '6px' }} />

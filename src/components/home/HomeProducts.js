@@ -1,5 +1,9 @@
 import './HomeProducts.css';
 import { ShoppingCart, Settings, BatteryChargingFull } from '@mui/icons-material';
+import kneecap from '../assets/kneecap.png';
+import mia from '../assets/kneecap.png';
+import botkit from '../assets/kneecap.png';
+
 
 const products = [
   {
@@ -7,14 +11,14 @@ const products = [
     subtitle: 'Robotic Arm',
     icon: ShoppingCart,
     image:
-      'https://images.unsplash.com/photo-1561144257-e32e8efc6c4f?q=80&w=1600&auto=format&fit=crop',
+      kneecap,
   },
   {
     title: 'A360 Core',
     subtitle: 'Articulation Module',
     icon: Settings,
     image:
-      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1600&auto=format&fit=crop',
+      {kneecap},
   },
   {
     title: 'Dock One',

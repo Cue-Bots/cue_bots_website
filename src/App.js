@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Home from './pages/Home';
 import OldPage from './pages/OldPage';
+import BuildPage from './pages/BuildPage';
 
 // import './App.css';
 // import NavBar from './components/nav_bar';
@@ -67,11 +68,14 @@ function App() {
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
-  if (route === '/old') {
-    return <OldPage />;
-  }
+  // if (route === '/old') {
+  //   return <OldPage />;
+  // }
 
-  return <Home />;
+  // return <Home />;
+
+  return <BuildPage />;
+
 }
 
 export default App;
