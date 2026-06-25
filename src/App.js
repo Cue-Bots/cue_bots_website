@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import Home from './pages/Home';
-import OldPage from './pages/OldPage';
-import BuildPage from './pages/BuildPage';
+// import Home from './pages/Home';
+// import OldPage from './pages/OldPage';
+// import BuildPage from './pages/BuildPage';
 
 // import './App.css';
 // import NavBar from './components/nav_bar';
