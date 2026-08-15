@@ -1,0 +1,35 @@
+.home-vision {
+  padding: 130px 0;
+}
+
+.home-vision-inner {
+  text-align: center;
+}
+
+.home-vision-title,
+.home-vision-text {
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+.home-vision-text {
+  color: var(--home-text-muted);
+  line-height: 1.75;
+}
+
+.home-tags {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.home-tag {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--home-border);
+  background: var(--home-surface);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.85rem;
+}

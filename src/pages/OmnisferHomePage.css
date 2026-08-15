@@ -1,0 +1,107 @@
+:root {
+  --home-bg: #05070a;
+  --home-surface: rgba(255, 255, 255, 0.03);
+  --home-surface-strong: rgba(255, 255, 255, 0.05);
+  --home-border: rgba(255, 255, 255, 0.12);
+  --home-text: rgba(255, 255, 255, 0.95);
+  --home-text-muted: rgba(255, 255, 255, 0.56);
+  --home-text-soft: rgba(255, 255, 255, 0.4);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.home-page {
+  min-height: 100vh;
+  background: var(--home-bg);
+  color: var(--home-text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.home-bg-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  z-index: 0;
+}
+
+.home-radial {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.2), transparent 40%);
+}
+
+.home-divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.home-container {
+  width: min(1440px, calc(100% - 32px));
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.home-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.34em;
+  color: var(--home-text-soft);
+  font-size: 0.72rem;
+  margin: 0 0 20px;
+}
+
+.home-section-title {
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  line-height: 1.08;
+  margin: 0 0 24px;
+  font-weight: 300;
+}
+
+.home-section-text {
+  color: var(--home-text-muted);
+  line-height: 1.75;
+}
+
+.home-btn {
+  border-radius: 999px;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  font-size: 0.92rem;
+}
+
+.home-btn-solid {
+  background: #fff;
+  color: #111;
+  border-color: #fff;
+}
+
+.home-btn-solid:hover {
+  transform: translateY(-1px);
+}
+
+.home-btn-outline {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.home-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    width: min(1440px, calc(100% - 20px));
+  }
+}
