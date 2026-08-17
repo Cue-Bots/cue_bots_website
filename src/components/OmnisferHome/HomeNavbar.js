@@ -10,9 +10,9 @@ export default function HomeNavbar() {
         </div>
 
         <nav className="home-nav-links" aria-label="Main navigation">
+          <a href="#vision">Vision</a>
           <a href="#technology">Technology</a>
           <a href="#products">Products</a>
-          <a href="#vision">Vision</a>
           <a href="#contact">Contact</a>
         </nav>
 

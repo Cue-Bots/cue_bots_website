@@ -1,31 +1,41 @@
 import './HomeProducts.css';
-import { ShoppingCart, Settings, BatteryChargingFull } from '@mui/icons-material';
-import kneecap from '../assets/kneecap.png';
-import mia from '../assets/kneecap.png';
-import botkit from '../assets/kneecap.png';
+import { CircleTwoTone, WidgetsTwoTone, PrecisionManufacturingTwoTone, NavigateNextTwoTone } from '@mui/icons-material';
 
+// import kneecap from '../assets/Omnisfer/kneecap_shop.png';
+// import kneecapHover from '../assets/Omnisfer/kneecap_D.png';
+// import Claw from '../assets/Omnisfer/Claw2_shop.png';
+// import ClawHover from '../assets/Omnisfer/Claw2_D.png';
+// import botkit from '../assets/Omnisfer/homescreen_light_shop.png';
+// import botkitHover from '../assets/Omnisfer/homescreen_light_shop_D.png';
+
+import kneecap from '../assets/Omnisfer/kneecap_D.png';
+import kneecapHover from '../assets/Omnisfer/kneecap_shop.png';
+import Claw from '../assets/Omnisfer/Claw2_D.png';
+import ClawHover from '../assets/Omnisfer/Claw2_shop.png';
+import botkit from '../assets/Omnisfer/homescreen_light_shop_D.png';
+import botkitHover from '../assets/Omnisfer/homescreen_light_shop.png';
 
 const products = [
   {
-    title: 'Cue Arm 360',
+    title: 'Arc Motors & Movements',
+    subtitle: 'Articulation',
+    icon: CircleTwoTone,
+    image: kneecap,
+    imageHover: kneecapHover,
+  },
+  {
+    title: 'Accesories',
+    subtitle: 'Additionnal Module',
+    icon: WidgetsTwoTone,
+    image: Claw,
+    imageHover: ClawHover,
+  },
+  {
+    title: 'Complete Solution',
     subtitle: 'Robotic Arm',
-    icon: ShoppingCart,
-    image:
-      kneecap,
-  },
-  {
-    title: 'A360 Core',
-    subtitle: 'Articulation Module',
-    icon: Settings,
-    image:
-      {kneecap},
-  },
-  {
-    title: 'Dock One',
-    subtitle: 'Charging Station',
-    icon: BatteryChargingFull,
-    image:
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop',
+    icon: PrecisionManufacturingTwoTone,
+    image: botkit,
+    imageHover: botkitHover,
   },
 ];
 
@@ -52,15 +62,25 @@ export default function HomeProducts() {
           {products.map((product) => (
             <article key={product.title} className="home-product-card">
               <div className="home-product-image-wrap">
-                <img src={product.image} alt={product.title} className="home-product-image" />
+                <img 
+                  src={product.image} 
+                  alt={product.title} 
+                  className="home-product-image img-default" 
+                />
+                <img 
+                  src={product.imageHover} 
+                  alt={`${product.title} alternate`} 
+                  className="home-product-image img-hover" 
+                />
               </div>
+              
               <div className="home-product-body">
                 <div>
-                  <product.icon sx={{ fontSize: 32, marginBottom: '8px', color: '#00d9ff' }} />
+                  <product.icon sx={{ fontSize: 32, marginBottom: '8px', color: 'var(--home-element)' }} />
                   <h3>{product.title}</h3>
                   <p>{product.subtitle}</p>
                 </div>
-                <div className="home-product-arrow" aria-hidden="true">-&gt;</div>
+                <div className="home-product-arrow" aria-hidden="true"><NavigateNextTwoTone sx={{ fontSize: 32, color: 'var(--home-element)' }} /></div>
               </div>
             </article>
           ))}

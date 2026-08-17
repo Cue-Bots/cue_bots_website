@@ -20,11 +20,11 @@ export default function Home() {
       <HomeNavbar />
       <main>
         <HomeHero />
-        <HomeAbout />
-        <HomeStats />
-        <HomeTechnology />
-        <HomeProducts />
         <HomeVision />
+        <HomeTechnology />
+        <HomeStats />
+        <HomeAbout />
+        <HomeProducts />
         <HomeContact />
       </main>
       <HomeFooter />

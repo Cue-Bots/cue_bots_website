@@ -1,5 +1,5 @@
 .home-about {
-  min-height: 100vh;
+  min-height: 10vh;
   display: grid;
   align-items: center;
   padding-top: 110px;
@@ -38,6 +38,7 @@
   position: relative;
   display: flex;
   justify-content: center;
+  padding: 0px;
 }
 
 .home-hero-glow {
@@ -45,6 +46,7 @@
   inset: 8% 10%;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 60%);
   filter: blur(60px);
+  margin: 27.5% 0 0 50%;
 }
 
 .home-hero-card {
@@ -53,9 +55,19 @@
   min-height: 640px;
   border-radius: 42px;
   overflow: hidden;
-  border: 1px solid var(--home-border);
+  /* border: 1px solid var(--home-border);
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-  box-shadow: 0 0 120px rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 120px rgba(255, 255, 255, 0.07); */
+  padding: 25% 0;
+  margin-top: -200px;
+  margin-left: -300px;
+  background-image: url('../assets/Omnisfer/Precision.png');
+  
+  background-size: 100%;
+  
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  width: 500%;
 }
 
 .home-hero-image {
@@ -66,15 +78,16 @@
   margin-top: -50px;
   object-fit: cover;
   opacity: 0.8;
+
 }
 
 .home-hero-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, #000, transparent, rgba(0, 0, 0, 0.22));
+  /* background: linear-gradient(to top, #000, transparent, rgba(0, 0, 0, 0.22)); */
 }
 
-.home-floating-ring {
+/* .home-floating-ring {
   position: absolute;
   top: 24px;
   right: 24px;
@@ -86,7 +99,7 @@
   place-items: center;
   backdrop-filter: blur(8px);
   background: rgba(255, 255, 255, 0.06);
-}
+} */
 
 .home-floating-ring-inner {
   width: 38px;
@@ -148,6 +161,10 @@
   gap: 10px;
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.88rem;
+}
+
+.home-innov  {
+  margin-top: -30%;
 }
 
 @media (max-width: 1100px) {

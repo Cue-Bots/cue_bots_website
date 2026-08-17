@@ -1,11 +1,27 @@
 :root {
+  color-scheme: dark;
   --home-bg: #05070a;
   --home-surface: rgba(255, 255, 255, 0.03);
   --home-surface-strong: rgba(255, 255, 255, 0.05);
   --home-border: rgba(255, 255, 255, 0.12);
-  --home-text: rgba(255, 255, 255, 0.95);
+  --home-text: #f0e5d9;
   --home-text-muted: rgba(255, 255, 255, 0.56);
   --home-text-soft: rgba(255, 255, 255, 0.4);
+  --home-element: #d1c6bc;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --home-bg: #e5e0de;
+    --home-surface: rgba(23, 24, 26, 0.05);
+    --home-surface-strong: rgba(23, 24, 26, 0.08);
+    --home-border: rgba(23, 24, 26, 0.14);
+    --home-text: #2d2c2c;
+    --home-text-muted: #4f575c;
+    --home-text-soft: #6a747b;
+    --home-element: #d1c6bc;
+  }
 }
 
 html {

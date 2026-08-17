@@ -5,10 +5,30 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(0, 0, 0, 0.35);
   margin: 0 auto;
+  backdrop-filter: blur(10px) saturate(1.1) brightness(1.1);
 
-   backdrop-filter: blur(50px) saturate(1.1) brightness(1.1);
-   -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 1) 65%);
-   mask-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+  mask-image: linear-gradient(
+    to bottom, 
+    rgb(0, 0, 0) 0%, 
+    rgb(0, 0, 0) 60%,
+    rgba(0, 0, 0, 0.6) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-size: 100% 100%;
+  mask-position: top center;
+  mask-repeat: no-repeat;
+
+  /* Safari */
+  /* -webkit-mask-image: -webkit-linear-gradient(
+    top, 
+    rgb(0, 0, 0) 0%, 
+    rgb(0, 0, 0) 60%, 
+    rgba(0, 0, 0, 0.6) 75%, 
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-position: top center;
+  -webkit-mask-repeat: no-repeat; */
 }
 
 .home-navbar-inner {

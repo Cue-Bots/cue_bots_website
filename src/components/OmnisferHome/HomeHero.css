@@ -240,7 +240,31 @@
   }
 
   .homehero-carousel {
-    width: min(84vw, 640px);
+    margin-bottom: 100px;
+    right: 0px;
+    bottom: 10px;
+    width: 100%;
+  }
+
+  .homehero-section {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.178), rgba(0, 0, 0, 0.274)),url('../assets/Omnisfer/homescreen_light_p.png');
+  background-size: 100%;
+  background-repeat:no-repeat;
+  }
+
+  .homehero-copy {
+    max-width: 60%;
+    margin-top: -40%;
+  }
+
+  .homehero-copy p{
+    font-size: 0.9rem;
+  }
+
+  .homehero-actions  {
+    margin-top: 0px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
@@ -255,10 +279,16 @@
 }
 
 @media (max-width: 768px) {
+
+    .homehero-copy {
+    max-width: 72%;
+    margin-top: -40%;
+  }
+
   .homehero-carousel {
-    right: 14px;
-    bottom: 14px;
-    width: auto;
+    right: 0px;
+    bottom: 95px;
+    width: 100%;
     padding: 12px 14px;
   }
 

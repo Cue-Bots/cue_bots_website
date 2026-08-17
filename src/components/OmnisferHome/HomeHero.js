@@ -146,7 +146,7 @@ export default function HomeHero() {
           </h1>
 
           <p className="homehero-lead">
-            Cue Bot develops advanced robotic systems and ultra-precise 360 degree
+            Omnisfer develops advanced robotic systems and ultra-precise 360 degree
             articulations engineered for the next generation of intelligent
             machines.
           </p>

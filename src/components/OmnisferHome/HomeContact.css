@@ -1,5 +1,6 @@
 .home-contact {
-  padding: 0 0 110px;
+  padding:  100px 0px 200px 0px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.03));
 }
 
 .home-contact-card {

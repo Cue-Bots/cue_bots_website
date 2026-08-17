@@ -1,4 +1,5 @@
 .home-vision {
+  background: linear-gradient(to top, transparent, rgba(255, 255, 255, 0.03));
   padding: 130px 0;
 }
 
