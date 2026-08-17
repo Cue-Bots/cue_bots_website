@@ -7,8 +7,8 @@ export default function HomeFooter() {
       <div className="home-container home-footer-inner">
         <p>Copyright 2026 Cue Bot. Engineered Motion.</p>
         <nav className="home-footer-links" aria-label="Social links">
-          <a href="#" title="LinkedIn"><LinkedIn sx={{ fontSize: 20 }} /></a>
-          <a href="#" title="Instagram"><Instagram sx={{ fontSize: 20 }} /></a>
+          <a href="#contact" title="LinkedIn"><LinkedIn sx={{ fontSize: 20 }} /></a>
+          <a href="#contact" title="Instagram"><Instagram sx={{ fontSize: 20 }} /></a>
           <a href="#contact" title="Contact"><Email sx={{ fontSize: 20 }} /></a>
         </nav>
       </div>

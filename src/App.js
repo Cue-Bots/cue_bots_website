@@ -4,13 +4,13 @@ import OldPage from './pages/OldPage';
 import BuildPage from './pages/BuildPage';
 
 import './App.css';
-import NavBar from './components/nav_bar';
-import FirstPage from './components/fisrt_page';
-import WaveGrid from './components/WaveGrid';
-import Describe from './components/describe';
-import Partner from './components/Partner';
-import Newletter from './components/Newletter';
-import Contact from './components/Contact';
+// import NavBar from './components/nav_bar';
+// import FirstPage from './components/fisrt_page';
+// import WaveGrid from './components/WaveGrid';
+// import Describe from './components/describe';
+// import Partner from './components/Partner';
+// import Newletter from './components/Newletter';
+// import Contact from './components/Contact';
 
 document.addEventListener('mousemove', (e) => {
   const x = (e.clientX / window.innerWidth - 0.5) * 10;

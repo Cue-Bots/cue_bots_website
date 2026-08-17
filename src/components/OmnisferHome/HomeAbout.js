@@ -72,7 +72,7 @@
 
 import './HomeAbout.css';
 // import kneecap from '../assets/Omnisfer/kneecap.png';
-import { ShoppingCart } from '@mui/icons-material';
+// import { ShoppingCart } from '@/mui/icons-material';
 
 export default function HomeAbout() {
   return (

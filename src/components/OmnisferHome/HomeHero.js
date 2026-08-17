@@ -47,7 +47,7 @@
 
 
 import './HomeHero.css';
-import kneecap from '../assets/arm_bot.png';
+// import kneecap from '../assets/arm_bot.png';
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 const logoContext = require.context('../assets/carrousel', false, /\.(png|jpe?g|svg|webp)$/i);

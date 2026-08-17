@@ -59,7 +59,7 @@
 
 
 import './HomeTechnology.css';
-import kneecap from '../assets/Omnisfer/kneecap_inarm.png';
+// import kneecap from '../assets/Omnisfer/kneecap_inarm.png';
 import { CheckCircle } from '@mui/icons-material';
 
 const features = [
