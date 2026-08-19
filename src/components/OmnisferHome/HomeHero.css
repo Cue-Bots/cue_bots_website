@@ -5,6 +5,7 @@
   padding-top: 90px;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
   --homehero-text: rgba(255, 255, 255, 0.95);
   --homehero-muted: rgba(255, 255, 255, 0.56);
   --homehero-soft: rgba(255, 255, 255, 0.4);
@@ -14,11 +15,48 @@
   background-position: center;
 }
 
+.homehero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.32));
+  opacity: 1;
+  transition: opacity 0.45s ease;
+  z-index: 0;
+}
+
+.homehero-section--video-active::before {
+  opacity: 0.42;
+}
+
+.homehero-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.homehero-background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 0.45s ease, transform 0.9s ease;
+  filter: saturate(1.05) contrast(1.04) brightness(0.94);
+}
+
+.homehero-section--video-active .homehero-background-video {
+  opacity: 1;
+  transform: scale(1.01);
+}
+
 .homehero-container {
   width: min(1120px, calc(100% - 48px));
   margin: 0 auto;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .homehero-grid {
@@ -78,6 +116,11 @@
 
 .homehero-btn-primary:hover {
   transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.homehero-btn-primary--hovered {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22), 0 10px 30px rgba(0, 0, 0, 0.18);
 }
 
 .homehero-btn-secondary {
@@ -192,7 +235,7 @@
   position: absolute;
   left: 0px;
   bottom: 100px;
-  z-index: 2;
+  z-index: 3;
   overflow: hidden;
   width: min(72vw, 1175px);
   width: min(72vw, 61.8%);
@@ -247,9 +290,9 @@
   }
 
   .homehero-section {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.178), rgba(0, 0, 0, 0.274)),url('../assets/Omnisfer/homescreen_light_p.png');
-  background-size: 100%;
-  background-repeat:no-repeat;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.178), rgba(0, 0, 0, 0.274)),url('../assets/Omnisfer/homescreen_light_p.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
   }
 
   .homehero-copy {

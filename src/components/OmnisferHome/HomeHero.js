@@ -48,7 +48,8 @@
 
 import './HomeHero.css';
 // import kneecap from '../assets/arm_bot.png';
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import robotVideo from '../assets/Omnisfer/video_robot.mp4';
 
 const logoContext = require.context('../assets/carrousel', false, /\.(png|jpe?g|svg|webp)$/i);
 
@@ -133,8 +134,169 @@ function HomeHeroCarousel() {
 }
 
 export default function HomeHero() {
+  const videoRef = useRef(null);
+  const reverseFrameRef = useRef(null);
+  const hoverRef = useRef(false);
+  const playbackModeRef = useRef('idle');
+  const reachedVideoEndRef = useRef(false);
+  const [isPrimaryHovered, setIsPrimaryHovered] = useState(false);
+  const [isVideoActive, setIsVideoActive] = useState(false);
+
+  const stopReversePlayback = () => {
+    if (reverseFrameRef.current !== null) {
+      cancelAnimationFrame(reverseFrameRef.current);
+      reverseFrameRef.current = null;
+    }
+  };
+
+  const finishPlayback = () => {
+    stopReversePlayback();
+    playbackModeRef.current = 'idle';
+    setIsVideoActive(false);
+  };
+
+  const startReversePlayback = (startTime) => {
+    const video = videoRef.current;
+    const safeStartTime = Number.isFinite(startTime) ? startTime : video?.currentTime;
+
+    if (!video || !Number.isFinite(safeStartTime) || safeStartTime <= 0) {
+      finishPlayback();
+      return;
+    }
+
+    stopReversePlayback();
+    playbackModeRef.current = 'reverse';
+    setIsVideoActive(true);
+
+    video.pause();
+    video.currentTime = Math.min(safeStartTime, video.duration || safeStartTime);
+
+    const stepReverse = () => {
+      if (playbackModeRef.current !== 'reverse') {
+        return;
+      }
+
+      const nextTime = Math.max(0, video.currentTime - 1 / 30);
+
+      const handleSeeked = () => {
+        if (playbackModeRef.current !== 'reverse') {
+          return;
+        }
+
+        if (nextTime <= 0) {
+          finishPlayback();
+          return;
+        }
+
+        reverseFrameRef.current = requestAnimationFrame(stepReverse);
+      };
+
+      video.addEventListener('seeked', handleSeeked, { once: true });
+      video.currentTime = nextTime;
+    };
+
+    reverseFrameRef.current = requestAnimationFrame(stepReverse);
+  };
+
+  const startForwardPlayback = () => {
+    const video = videoRef.current;
+
+    if (!video) {
+      return;
+    }
+
+    hoverRef.current = true;
+    reachedVideoEndRef.current = false;
+    stopReversePlayback();
+    playbackModeRef.current = 'forward';
+    setIsVideoActive(true);
+
+    try {
+      if (Number.isFinite(video.duration) && video.duration > 0 && video.currentTime >= video.duration - 0.05) {
+        video.currentTime = 0;
+      } else if (video.currentTime <= 0) {
+        video.currentTime = 0;
+      }
+    } catch {
+      // The video can be a frame behind while metadata loads; playback still works.
+    }
+
+    const playPromise = video.play();
+
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        finishPlayback();
+      });
+    }
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video) {
+      return undefined;
+    }
+
+    const handleEnded = () => {
+      if (playbackModeRef.current !== 'forward') {
+        return;
+      }
+
+      if (hoverRef.current) {
+        reachedVideoEndRef.current = true;
+        playbackModeRef.current = 'idle';
+        setIsVideoActive(true);
+        return;
+      }
+
+      startReversePlayback(video.currentTime);
+    };
+
+    video.addEventListener('ended', handleEnded);
+
+    return () => {
+      video.removeEventListener('ended', handleEnded);
+    };
+  }, []);
+
+  const handlePrimaryEnter = () => {
+    hoverRef.current = true;
+    setIsPrimaryHovered(true);
+    startForwardPlayback();
+  };
+
+  const handlePrimaryLeave = () => {
+    hoverRef.current = false;
+    setIsPrimaryHovered(false);
+
+    if (playbackModeRef.current === 'forward' || (playbackModeRef.current === 'idle' && reachedVideoEndRef.current && isVideoActive)) {
+      startReversePlayback(videoRef.current?.currentTime ?? 0);
+    }
+  };
+
+  const handlePrimaryFocus = () => {
+    handlePrimaryEnter();
+  };
+
+  const handlePrimaryBlur = () => {
+    handlePrimaryLeave();
+  };
+
+  useEffect(() => () => stopReversePlayback(), []);
+
   return (
-    <section className="homehero-section">
+    <section className={`homehero-section ${isVideoActive ? 'homehero-section--video-active' : ''}`}>
+      <div className="homehero-background" aria-hidden="true">
+        <video
+          ref={videoRef}
+          className="homehero-background-video"
+          src={robotVideo}
+          muted
+          playsInline
+          preload="auto"
+        />
+      </div>
+
       <div className="homehero-container homehero-grid">
         <div className="homehero-copy">
           <p className="homehero-kicker">Engineered Motion</p>
@@ -152,7 +314,14 @@ export default function HomeHero() {
           </p>
 
           <div className="homehero-actions">
-            <button className="homehero-btn homehero-btn-primary" type="button">
+            <button
+              className={`homehero-btn homehero-btn-primary ${isPrimaryHovered ? 'homehero-btn-primary--hovered' : ''}`}
+              type="button"
+              onMouseEnter={handlePrimaryEnter}
+              onMouseLeave={handlePrimaryLeave}
+              onFocus={handlePrimaryFocus}
+              onBlur={handlePrimaryBlur}
+            >
               Discover Technology
             </button>
             <button className="homehero-btn homehero-btn-secondary" type="button">

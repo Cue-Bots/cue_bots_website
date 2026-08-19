@@ -121,7 +121,9 @@ export default function HomeAbout() {
           </h1>
 
           <p className="home-lead">
-            The first omnidirectionnal robotic articulation with continuous 360 degree rotation and ultra-precise motion engineered for the next generation of intelligent machines.
+            Every component is designed, engineered and manufactured to exceed
+            the limits of modern robotics. Built for fluidity, reliability and
+            seamless integration.
           </p>
 
           <div className="home-hero-actions">
