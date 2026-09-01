@@ -139,46 +139,51 @@ export default function HomeHero() {
   };
 
   useEffect(() => {
-    const video = videoRef.current;
+  const video = videoRef.current;
+  const reverseVideo = reverseVideoRef.current; 
 
-    if (!video) {
-      return undefined;
+  if (!video) {
+    return undefined;
+  }
+
+  const handleLoadedMetadata = () => {
+    video.currentTime = 0;
+    videoPositionRef.current = 'start';
+  };
+
+  const handleEnded = () => {
+    if (playbackModeRef.current !== 'forward') {
+      return;
     }
 
-    const handleLoadedMetadata = () => {
-      video.currentTime = 0;
-      videoPositionRef.current = 'start';
-    };
+    videoPositionRef.current = 'end';
+    playbackModeRef.current = 'idle';
+  };
 
-    const handleEnded = () => {
-      if (playbackModeRef.current !== 'forward') {
-        return;
-      }
+  const handleReverseEnded = () => {
+    if (playbackModeRef.current !== 'reverse') {
+      return;
+    }
 
-      videoPositionRef.current = 'end';
-      playbackModeRef.current = 'idle';
-    };
+    if (reverseVideo) {
+      reverseVideo.pause();
+    }
+    videoPositionRef.current = 'start';
+    playbackModeRef.current = 'idle';
+  };
 
-    const handleReverseEnded = () => {
-      if (playbackModeRef.current !== 'reverse') {
-        return;
-      }
+  video.addEventListener('loadedmetadata', handleLoadedMetadata);
+  video.addEventListener('ended', handleEnded);
+  
+  reverseVideo?.addEventListener('ended', handleReverseEnded);
 
-      reverseVideoRef.current.pause();
-      videoPositionRef.current = 'start';
-      playbackModeRef.current = 'idle';
-    };
-
-    video.addEventListener('loadedmetadata', handleLoadedMetadata);
-    video.addEventListener('ended', handleEnded);
-    reverseVideoRef.current?.addEventListener('ended', handleReverseEnded);
-
-    return () => {
-      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      video.removeEventListener('ended', handleEnded);
-      reverseVideoRef.current?.removeEventListener('ended', handleReverseEnded);
-    };
-  }, []);
+  return () => {
+    video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+    video.removeEventListener('ended', handleEnded);
+    
+    reverseVideo?.removeEventListener('ended', handleReverseEnded);
+  };
+}, []);
 
   const handlePrimaryClick = (event) => {
     event.preventDefault();
@@ -228,13 +233,13 @@ export default function HomeHero() {
           </p>
 
           <div className="homehero-actions">
-            <a
+            <button
               className="homehero-btn homehero-btn-primary"
               type="button"
               onClick={handlePrimaryClick}
             >
               Launch Robotic Arm
-            </a>
+            </button>
             <a className="homehero-btn homehero-btn-secondary" type="button" href="ARC" >
               View ARC Motor
             </a>
