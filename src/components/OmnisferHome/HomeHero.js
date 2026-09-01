@@ -1,55 +1,7 @@
-// import './homescreenHero.css';
-// import kneecap from '../assets/kneecap.png';
-
-// export default function homescreenHero() {
-//   return (
-//     <section className="homescreen-hero">
-//       <div className="homescreen-container homescreen-hero-grid">
-//         <div>
-//           <p className="homescreen-kicker">Engineered Motion</p>
-
-//           <h1 className="homescreen-title">
-//             Where motion
-//             <br />
-//             becomes
-//             <br />
-//             natural.
-//           </h1>
-
-//           <p className="homescreen-lead">
-//             Cue Bot develops advanced robotic systems and ultra-precise 360 degree
-//             articulations engineered for the next generation of intelligent
-//             machines.
-//           </p>
-
-//           <div className="homescreen-hero-actions">
-//             <button className="homescreen-btn homescreen-btn-solid" type="button">
-//               Discover Technology
-//             </button>
-//             <button className="homescreen-btn homescreen-btn-outline" type="button">
-//               View Products
-//             </button>
-//           </div>
-//         </div>
-
-//         <div className="homescreen-hero-card-wrap">
-//           <div className="homescreen-hero-glow" />
-
-//           <img src={kneecap} alt="Kneecap" className="homescreen-hero-image" />
-
-          
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
-
-
 import './HomeHero.css';
-// import kneecap from '../assets/arm_bot.png';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import robotVideo from '../assets/Omnisfer/video_robot.mp4';
+import robotVideo from '../assets/Omnisfer/output.webm';
+import robotReverseVideo from '../assets/Omnisfer/output_r.webm';
 
 const logoContext = require.context('../assets/carrousel', false, /\.(png|jpe?g|svg|webp)$/i);
 
@@ -135,97 +87,53 @@ function HomeHeroCarousel() {
 
 export default function HomeHero() {
   const videoRef = useRef(null);
-  const reverseFrameRef = useRef(null);
-  const hoverRef = useRef(false);
+  const reverseVideoRef = useRef(null);
+  const videoPositionRef = useRef('start');
+  const [isReverseVisible, setIsReverseVisible] = useState(false);
   const playbackModeRef = useRef('idle');
-  const reachedVideoEndRef = useRef(false);
-  const [isPrimaryHovered, setIsPrimaryHovered] = useState(false);
-  const [isVideoActive, setIsVideoActive] = useState(false);
 
-  const stopReversePlayback = () => {
-    if (reverseFrameRef.current !== null) {
-      cancelAnimationFrame(reverseFrameRef.current);
-      reverseFrameRef.current = null;
-    }
-  };
+  const startReversePlayback = () => {
+    const reverseVideo = reverseVideoRef.current;
 
-  const finishPlayback = () => {
-    stopReversePlayback();
-    playbackModeRef.current = 'idle';
-    setIsVideoActive(false);
-  };
-
-  const startReversePlayback = (startTime) => {
-    const video = videoRef.current;
-    const safeStartTime = Number.isFinite(startTime) ? startTime : video?.currentTime;
-
-    if (!video || !Number.isFinite(safeStartTime) || safeStartTime <= 0) {
-      finishPlayback();
+    if (!reverseVideo) {
       return;
     }
 
-    stopReversePlayback();
     playbackModeRef.current = 'reverse';
-    setIsVideoActive(true);
+    videoPositionRef.current = 'reverse';
+    reverseVideo.currentTime = 0;
+    setIsReverseVisible(true);
 
-    video.pause();
-    video.currentTime = Math.min(safeStartTime, video.duration || safeStartTime);
+    const playPromise = reverseVideo.play();
 
-    const stepReverse = () => {
-      if (playbackModeRef.current !== 'reverse') {
-        return;
-      }
-
-      const nextTime = Math.max(0, video.currentTime - 1 / 30);
-
-      const handleSeeked = () => {
-        if (playbackModeRef.current !== 'reverse') {
-          return;
-        }
-
-        if (nextTime <= 0) {
-          finishPlayback();
-          return;
-        }
-
-        reverseFrameRef.current = requestAnimationFrame(stepReverse);
-      };
-
-      video.addEventListener('seeked', handleSeeked, { once: true });
-      video.currentTime = nextTime;
-    };
-
-    reverseFrameRef.current = requestAnimationFrame(stepReverse);
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        playbackModeRef.current = 'idle';
+        videoPositionRef.current = 'end';
+        setIsReverseVisible(false);
+      });
+    }
   };
 
   const startForwardPlayback = () => {
     const video = videoRef.current;
 
-    if (!video) {
+    if (!video || videoPositionRef.current !== 'start') {
       return;
     }
 
-    hoverRef.current = true;
-    reachedVideoEndRef.current = false;
-    stopReversePlayback();
     playbackModeRef.current = 'forward';
-    setIsVideoActive(true);
+    videoPositionRef.current = 'forward';
+    setIsReverseVisible(false);
 
-    try {
-      if (Number.isFinite(video.duration) && video.duration > 0 && video.currentTime >= video.duration - 0.05) {
-        video.currentTime = 0;
-      } else if (video.currentTime <= 0) {
-        video.currentTime = 0;
-      }
-    } catch {
-      // The video can be a frame behind while metadata loads; playback still works.
-    }
+    video.currentTime = 0;
 
     const playPromise = video.play();
 
     if (playPromise && typeof playPromise.catch === 'function') {
       playPromise.catch(() => {
-        finishPlayback();
+        videoPositionRef.current = 'start';
+        playbackModeRef.current = 'idle';
       });
     }
   };
@@ -237,60 +145,66 @@ export default function HomeHero() {
       return undefined;
     }
 
+    const handleLoadedMetadata = () => {
+      video.currentTime = 0;
+      videoPositionRef.current = 'start';
+    };
+
     const handleEnded = () => {
       if (playbackModeRef.current !== 'forward') {
         return;
       }
 
-      if (hoverRef.current) {
-        reachedVideoEndRef.current = true;
-        playbackModeRef.current = 'idle';
-        setIsVideoActive(true);
+      videoPositionRef.current = 'end';
+      playbackModeRef.current = 'idle';
+    };
+
+    const handleReverseEnded = () => {
+      if (playbackModeRef.current !== 'reverse') {
         return;
       }
 
-      startReversePlayback(video.currentTime);
+      reverseVideoRef.current.pause();
+      videoPositionRef.current = 'start';
+      playbackModeRef.current = 'idle';
     };
 
+    video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('ended', handleEnded);
+    reverseVideoRef.current?.addEventListener('ended', handleReverseEnded);
 
     return () => {
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
       video.removeEventListener('ended', handleEnded);
+      reverseVideoRef.current?.removeEventListener('ended', handleReverseEnded);
     };
   }, []);
 
-  const handlePrimaryEnter = () => {
-    hoverRef.current = true;
-    setIsPrimaryHovered(true);
-    startForwardPlayback();
-  };
+  const handlePrimaryClick = (event) => {
+    event.preventDefault();
 
-  const handlePrimaryLeave = () => {
-    hoverRef.current = false;
-    setIsPrimaryHovered(false);
-
-    if (playbackModeRef.current === 'forward' || (playbackModeRef.current === 'idle' && reachedVideoEndRef.current && isVideoActive)) {
-      startReversePlayback(videoRef.current?.currentTime ?? 0);
+    if (videoPositionRef.current === 'start') {
+      startForwardPlayback();
+    } else if (videoPositionRef.current === 'end') {
+      startReversePlayback();
     }
   };
 
-  const handlePrimaryFocus = () => {
-    handlePrimaryEnter();
-  };
-
-  const handlePrimaryBlur = () => {
-    handlePrimaryLeave();
-  };
-
-  useEffect(() => () => stopReversePlayback(), []);
-
   return (
-    <section className={`homehero-section ${isVideoActive ? 'homehero-section--video-active' : ''}`}>
+    <section className="homehero-section">
       <div className="homehero-background" aria-hidden="true">
         <video
           ref={videoRef}
-          className="homehero-background-video"
+          className={`homehero-background-video${isReverseVisible ? ' homehero-background-video--hidden' : ''}`}
           src={robotVideo}
+          muted
+          playsInline
+          preload="auto"
+        />
+        <video
+          ref={reverseVideoRef}
+          className={`homehero-background-video homehero-background-video--reverse${isReverseVisible ? '' : ' homehero-background-video--hidden'}`}
+          src={robotReverseVideo}
           muted
           playsInline
           preload="auto"
@@ -314,19 +228,16 @@ export default function HomeHero() {
           </p>
 
           <div className="homehero-actions">
-            <button
-              className={`homehero-btn homehero-btn-primary ${isPrimaryHovered ? 'homehero-btn-primary--hovered' : ''}`}
+            <a
+              className="homehero-btn homehero-btn-primary"
               type="button"
-              onMouseEnter={handlePrimaryEnter}
-              onMouseLeave={handlePrimaryLeave}
-              onFocus={handlePrimaryFocus}
-              onBlur={handlePrimaryBlur}
+              onClick={handlePrimaryClick}
             >
-              Discover Technology
-            </button>
-            <button className="homehero-btn homehero-btn-secondary" type="button">
-              View Products
-            </button>
+              Launch Robotic Arm
+            </a>
+            <a className="homehero-btn homehero-btn-secondary" type="button" href="ARC" >
+              View ARC Motor
+            </a>
           </div>
         </div>
       </div>

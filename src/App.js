@@ -1,16 +1,9 @@
 import { useEffect, useState } from 'react';
-import Home from './pages/OmnisferHomePage';
-import OldPage from './pages/OldPage';
+import HomePage from './pages/OmnisferHomePage';
+import Old from './pages/OldPage';
+import ARCPage from './pages/OmnisferARCPage';
 import BuildPage from './pages/BuildPage';
-
 import './App.css';
-// import NavBar from './components/nav_bar';
-// import FirstPage from './components/fisrt_page';
-// import WaveGrid from './components/WaveGrid';
-// import Describe from './components/describe';
-// import Partner from './components/Partner';
-// import Newletter from './components/Newletter';
-// import Contact from './components/Contact';
 
 document.addEventListener('mousemove', (e) => {
   const x = (e.clientX / window.innerWidth - 0.5) * 10;
@@ -22,37 +15,6 @@ document.addEventListener('mousemove', (e) => {
   }
 });
 
-
-// function App() {
-//   return (
-//     <div id="acceuil" className="App">
-//       <header className="App-header">
-//         <section className="section dark-bg">
-//         <NavBar />
-//         <FirstPage />
-//         </section>
-//       </header>
-//       <div className="BackgroundWrapper">
-//         <WaveGrid />
-//       </div>
-//       <section className="section light-bg">
-//         <Describe />
-//       </section>
-//       <section className="section dark-bg">
-//         <Partner />
-//       </section>
-//       <section className="section dark-bg">
-//         <Newletter />
-//       </section>
-//       <section className="section dark-bg">
-//         <Contact />
-//       </section>
-//     </div>
-//   );
-// }
-
-
-// export default App;
 
 function getRoute() {
   return window.location.pathname || '/';
@@ -68,11 +30,14 @@ function App() {
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
-  if (route === '/old') {
-    return <OldPage />;
+  if (route === '/ARC') {
+    return <ARCPage />;
   }
   if (route === '/new') {
-    return <Home />;
+    return <HomePage />;
+  }
+  if (route === '/old') {
+    return <Old />;
   }
 
   return <BuildPage />;

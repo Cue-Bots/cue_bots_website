@@ -1,8 +1,9 @@
 .homehero-section {
   min-height: 100vh;
+  min-height: 100svh;
   display: grid;
   align-items: center;
-  padding-top: 90px;
+  padding-top: 0px;
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -10,9 +11,10 @@
   --homehero-muted: rgba(255, 255, 255, 0.56);
   --homehero-soft: rgba(255, 255, 255, 0.4);
   --homehero-border: rgba(255, 255, 255, 0.12);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.178), rgba(0, 0, 0, 0.274)),url('../assets/Omnisfer/homescreen_light.png');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.078), rgba(0, 0, 0, 0.03)),url('../assets/Omnisfer/homepage_ring_wall_v2.png');
   background-size: cover;
-  background-position: center;
+  background-repeat: no-repeat;
+  background-position: right center;
 }
 
 .homehero-section::before {
@@ -32,7 +34,7 @@
 .homehero-background {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 3;
   pointer-events: none;
 }
 
@@ -40,29 +42,38 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  opacity: 0;
-  transform: scale(1.03);
-  transition: opacity 0.45s ease, transform 0.9s ease;
+  object-position: right center;
+  opacity: 1;
+  transform: translateY(4%) scale(1.03);
+  transition: transform 0.9s ease;
   filter: saturate(1.05) contrast(1.04) brightness(0.94);
 }
 
+.homehero-background-video--hidden {
+  visibility: hidden;
+}
+
+.homehero-background-video--reverse {
+  position: absolute;
+  inset: 0;
+}
+
 .homehero-section--video-active .homehero-background-video {
-  opacity: 1;
-  transform: scale(1.01);
+  transform: translateY(4%) scale(1.01);
 }
 
 .homehero-container {
+  top: 5%;
   width: min(1120px, calc(100% - 48px));
   margin: 0 auto;
   position: relative;
   z-index: 2;
+  left: 0px;
 }
 
 .homehero-grid {
   display: grid;
   margin-top: -200px;
-  /* left : -100px; */
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 60px;
   align-items: center;
@@ -132,13 +143,6 @@
 .homehero-btn-secondary:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-
-/* .homehero-glow {
-  position: absolute;
-  inset: 8% 10%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 60%);
-  filter: blur(60px);
-} */
 
 .homehero-image {
   display: block;
@@ -234,17 +238,13 @@
 .homehero-carousel {
   position: absolute;
   left: 0px;
-  bottom: 100px;
-  z-index: 3;
+  bottom: 50px;
+  z-index: 1;
   overflow: hidden;
   width: min(72vw, 1175px);
   width: min(72vw, 61.8%);
   padding: 14px 18px;
   border-radius: 18px;
-  /* border: 1px solid rgba(255, 255, 255, 0.12); */
-  /* background: rgba(0, 0, 0, 0.28); */
-  /* backdrop-filter: blur(14px); */
-  /* mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); */
 }
 .homehero-carousel-track {
   display: flex;
@@ -290,9 +290,10 @@
   }
 
   .homehero-section {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.178), rgba(0, 0, 0, 0.274)),url('../assets/Omnisfer/homescreen_light_p.png');
-    background-size: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.178), rgba(0, 0, 0, 0.274)),url('../assets/Omnisfer/homepage_ring_wall_m.png');
+    background-size: cover;
     background-repeat: no-repeat;
+    background-position: right center;
   }
 
   .homehero-copy {
@@ -309,6 +310,22 @@
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .homehero-background-video {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 150%;
+    height: 100%;
+    left: -35%;
+    object-fit: contain;
+    object-position: right center;
+    transform: none;
+  }
+
+  .homehero-section--video-active .homehero-background-video {
+    transform: none;
+  }
+
 }
 
 @media (min-width: 768px) {
@@ -340,7 +357,7 @@
   }
 
   .homehero-image {
-    height: 70vh;
+    height: 70svh;
     max-height: 500px;
     max-width: 100%;
     transform: scale(1.02);
