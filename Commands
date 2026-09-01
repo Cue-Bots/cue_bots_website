@@ -1,0 +1,7 @@
+powershell admin :
+netsh interface portproxy reset
+New-NetFirewallRule -DisplayName "WSL React Port 3000" -Direction Inbound -Action Allow -Protocol TCP -LocalPort 3000         
+
+
+wsl :
+HOST=0.0.0.0 npm start

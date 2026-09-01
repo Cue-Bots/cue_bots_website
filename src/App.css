@@ -1,5 +1,11 @@
 html {
+  background-color: transparent;
   scroll-behavior: smooth;
+}
+
+body,
+#root {
+  background-color: transparent;
 }
 
 
