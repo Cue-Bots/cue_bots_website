@@ -1,7 +1,13 @@
 import './HomeHero.css';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import robotVideo from '../assets/Omnisfer/output.webm';
+import robotVideoIOS from '../assets/Omnisfer/output.mov';
 import robotReverseVideo from '../assets/Omnisfer/output_r.webm';
+import robotReverseVideoIOS from '../assets/Omnisfer/output_r.mov';
+
+const isIOSDevice = typeof navigator !== 'undefined'
+  && (/iPad|iPhone|iPod/.test(navigator.userAgent)
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
 
 const logoContext = require.context('../assets/carrousel', false, /\.(png|jpe?g|svg|webp)$/i);
 
@@ -201,7 +207,7 @@ export default function HomeHero() {
         <video
           ref={videoRef}
           className={`homehero-background-video${isReverseVisible ? ' homehero-background-video--hidden' : ''}`}
-          src={robotVideo}
+          src={isIOSDevice ? robotVideoIOS : robotVideo}
           muted
           playsInline
           preload="auto"
@@ -209,7 +215,7 @@ export default function HomeHero() {
         <video
           ref={reverseVideoRef}
           className={`homehero-background-video homehero-background-video--reverse${isReverseVisible ? '' : ' homehero-background-video--hidden'}`}
-          src={robotReverseVideo}
+          src={isIOSDevice ? robotReverseVideoIOS : robotReverseVideo}
           muted
           playsInline
           preload="auto"
