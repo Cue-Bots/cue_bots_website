@@ -24,21 +24,39 @@
   }
 }
 
-html {
+/* 1. LA SOLUTION SAFARI : Tout doit être transparent à la racine */
+html, body, #root {
+  background-color: transparent !important;
   scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
 }
 
+/* 2. La div principale devient transparente aussi */
 .home-page {
   min-height: 100vh;
-  background: var(--home-bg);
+  background-color: transparent; /* <-- Changé ici */
   color: var(--home-text);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
   overflow-x: hidden;
 }
 
-.home-bg-overlay {
+/* 3. On recrée ton fond de page, mais en mode "fixe" (comme dans ton ancien code) */
+.home-page::before {
+  content: "";
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--home-bg);
+  z-index: -2; /* Tout au fond, derrière le contenu */
+}
+
+/* Le reste de ton code ne change pas */
+.home-bg-overlay {
+  position:relative;
   inset: 0;
   pointer-events: none;
   opacity: 0.12;

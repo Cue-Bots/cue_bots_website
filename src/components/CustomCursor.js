@@ -4,8 +4,9 @@ import { useEffect, useState, useRef } from 'react';
 export default function CustomCursor() {
   const [cursorStyle, setCursorStyle] = useState('default');
   
-  // Référence pour garder en mémoire l'élément actuellement survolé
   const activeElement = useRef(null);
+  // On sauvegarde la position de la souris pour le scroll
+  const lastMousePos = useRef({ x: -100, y: -100 });
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -22,81 +23,96 @@ export default function CustomCursor() {
   const borderRadius = useSpring(cursorRadius, springConfig);
 
   useEffect(() => {
-    // 1. Détecte QUAND on entre ou sort d'un élément
-    const handleMouseOver = (e) => {
-      const target = e.target.closest('button, a, input, textarea');
-      activeElement.current = target;
-
+    // Fonction centrale pour calculer la position et la forme
+    const updateCursor = (clientX, clientY, target) => {
       if (target) {
         const isText = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
-        if (!isText) {
-          // On récupère le border-radius de l'élément pour s'y adapter
+        const rect = target.getBoundingClientRect(); // Calcule la position en direct !
+
+        if (isText) {
+          cursorRadius.set(2);
+          setCursorStyle('text');
+
+          const h = Math.min(rect.height * 0.7, 32);
+          cursorWidth.set(4);
+          cursorHeight.set(h);
+          cursorX.set(clientX - 2);
+          cursorY.set(clientY - h / 2);
+        } else {
           const style = window.getComputedStyle(target);
           const parsedRadius = parseInt(style.borderRadius);
           cursorRadius.set(isNaN(parsedRadius) ? 12 : parsedRadius + 6);
           setCursorStyle('button');
-        } else {
-          cursorRadius.set(2);
-          setCursorStyle('text');
+
+          const padding = 12;
+          const w = rect.width + padding;
+          const h = rect.height + padding;
+
+          cursorWidth.set(w);
+          cursorHeight.set(h);
+
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+
+          const offsetX = ((clientX - centerX) / (rect.width / 2)) * 4;
+          const offsetY = ((clientY - centerY) / (rect.height / 2)) * 4;
+
+          // L'ancrage suit la position 'rect.top' qui se met à jour quand on scroll
+          cursorX.set(rect.left - (padding / 2) + offsetX);
+          cursorY.set(rect.top - (padding / 2) + offsetY);
         }
       } else {
-        // Retour au curseur normal
+        // Retour à la normale
         cursorWidth.set(20);
         cursorHeight.set(20);
         cursorRadius.set(10);
         setCursorStyle('default');
+
+        cursorX.set(clientX - 16);
+        cursorY.set(clientY - 16);
       }
     };
 
-    // 2. Gère le mouvement et l'EFFET MAGNÉTIQUE
+    // 1. Quand la souris bouge
     const handleMouseMove = (e) => {
-      if (!activeElement.current) {
-        // Comportement par défaut : suit la souris et se centre
-        cursorX.set(e.clientX - 16);
-        cursorY.set(e.clientY - 16);
-        return;
-      }
+      lastMousePos.current = { x: e.clientX, y: e.clientY };
+      updateCursor(e.clientX, e.clientY, activeElement.current);
+    };
 
-      const target = activeElement.current;
-      const rect = target.getBoundingClientRect();
-      const isText = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
+    // 2. Quand la souris entre dans un élément interactif
+    const handleMouseOver = (e) => {
+      const target = e.target.closest('button, a, input, textarea');
+      activeElement.current = target;
+      
+      const mouseX = lastMousePos.current.x !== -100 ? lastMousePos.current.x : e.clientX;
+      const mouseY = lastMousePos.current.y !== -100 ? lastMousePos.current.y : e.clientY;
+      updateCursor(mouseX, mouseY, target);
+    };
 
-      if (isText) {
-        const h = Math.min(rect.height * 0.7, 32);
-        cursorWidth.set(4);
-        cursorHeight.set(h);
-        cursorX.set(e.clientX - 2);
-        cursorY.set(e.clientY - h / 2);
-      } else {
-        // --- MODE MAGNÉTIQUE (Boutons et Liens) ---
-        const padding = 12; // Marge autour du bouton
-        const w = rect.width + padding;
-        const h = rect.height + padding;
-        
-        cursorWidth.set(w);
-        cursorHeight.set(h);
+    // 3. LA CORRECTION DU BUG : Quand on scroll
+    const handleScroll = () => {
+      const { x: mouseX, y: mouseY } = lastMousePos.current;
+      if (mouseX === -100 && mouseY === -100) return; // Si la souris n'a jamais bougé
 
-        // On calcule le centre exact du bouton
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
+      // Le pointeur a 'pointerEvents: none', donc document.elementFromPoint passe au travers 
+      // et récupère le VRAI élément situé sous la souris (qui n'a pas bougée physiquement)
+      const el = document.elementFromPoint(mouseX, mouseY);
+      const target = el?.closest('button, a, input, textarea');
 
-        // On calcule la distance de la souris par rapport au centre du bouton
-        // Cela crée un micro-mouvement (max 4 pixels) très élégant (parallaxe)
-        const offsetX = ((e.clientX - centerX) / (rect.width / 2)) * 4;
-        const offsetY = ((e.clientY - centerY) / (rect.height / 2)) * 4;
-
-        // Au lieu de suivre e.clientX, on ACCROCHE le curseur aux coordonnées du bouton !
-        cursorX.set(rect.left - (padding / 2) + offsetX);
-        cursorY.set(rect.top - (padding / 2) + offsetY);
-      }
+      // Met à jour la référence et recalcule la position en direct !
+      activeElement.current = target;
+      updateCursor(mouseX, mouseY, target);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseover', handleMouseOver);
+    // On ajoute 'passive: true' pour que le scroll reste ultra fluide
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [cursorX, cursorY, cursorWidth, cursorHeight, cursorRadius]);
 

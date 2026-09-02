@@ -129,14 +129,6 @@
     -webkit-mask-repeat: no-repeat;
   }
 
-  @supports (padding-top: env(safe-area-inset-top)) {
-    .NavBar::before {
-      background: transparent;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-    }
-  }
-
   .NavBar > * {
     position: relative;
     z-index: 1;
@@ -322,7 +314,6 @@
   
   
   .dropdown-menu a:hover {
-    /* background: #000000; */
     color: #232526;
     font-weight: 600;
     text-shadow: none;
