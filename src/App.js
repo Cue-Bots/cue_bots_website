@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import HomePage from './pages/OmnisferHomePage';
-import Old from './pages/OldPage';
 import ARCPage from './pages/OmnisferARCPage';
 import BuildPage from './pages/BuildPage';
 import './App.css';
@@ -29,17 +28,13 @@ function App() {
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
-
-  if (route === '/ARC') {
-    return <ARCPage />;
-  }
+  
   if (route === '/new') {
     return <HomePage />;
   }
-  if (route === '/old') {
-    return <Old />;
+  if (route === '/ARC') {
+    return <ARCPage />;
   }
-
   return <BuildPage />;
 
 }

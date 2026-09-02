@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './OmnisferHomePage.css';
 
-import LoadingLogo from '../components/assets/Omnisfer/FaviconOmnisfer.png'; // Assurez-vous que le chemin est correct
+import LoadingLogo from '../components/assets/Omnisfer/FaviconOmnisfer.png';
 
-import CustomCursor from '../components/CustomCursor'; // Ajuste le chemin
-import HomeNavbar from '../components/OmnisferHome/HomeNavbar';
+import CustomCursor from '../components/Common/CustomCursor';
+import HomeNavbar from '../components/Common/HomeNavbar';
 import HomeHero from '../components/OmnisferHome/HomeHero';
 import HomeAbout from '../components/OmnisferHome/HomeAbout';
 import HomeStats from '../components/OmnisferHome/HomeStats';
@@ -13,9 +13,8 @@ import HomeTechnology from '../components/OmnisferHome/HomeTechnology';
 import HomeProducts from '../components/OmnisferHome/HomeProducts';
 import HomeVision from '../components/OmnisferHome/HomeVision';
 import HomeContact from '../components/OmnisferHome/HomeContact';
-import HomeFooter from '../components/OmnisferHome/HomeFooter';
+import HomeFooter from '../components/Common/HomeFooter';
 
-// Composant utilitaire pour animer les sections au scroll
 const ScrollSection = ({ children }) => {
   return (
     <motion.div
@@ -24,7 +23,7 @@ const ScrollSection = ({ children }) => {
       viewport={{ once: true, margin: "0px 0px -20% 0px" }}
       transition={{ 
         duration: 1.2, 
-        ease: [0.16, 1, 0.3, 1] // Courbe "premium" (départ rapide, fin très douce)
+        ease: [0.16, 1, 0.3, 1]
       }}
     >
       {children}
@@ -36,9 +35,8 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Vérifie si tout est déjà chargé
     if (document.readyState === 'complete') {
-      setTimeout(() => setIsLoading(false), 800); // Petit délai pour laisser l'animation du logo se faire
+      setTimeout(() => setIsLoading(false), 800);
     } else {
       const handleLoad = () => {
         setTimeout(() => setIsLoading(false), 800);

@@ -1,7 +1,7 @@
 import '../App.css';
-import HomeNavbar from '../components/OmnisferHome/HomeNavbar';
-import WaveGrid from '../components/OmnisferHome/OmnisferWaveGrid.js';
-import ARC from '../components/OmnisferHome/OmnisferARC.js';
+import HomeNavbar from '../components/Common/HomeNavbar.js';
+import WaveGrid from '../components/MotorARCPage/OmnisferWaveGrid.js';
+import ARC from '../components/MotorARCPage/OmnisferARC.js';
 
 export default function OldPage() {
   return (
