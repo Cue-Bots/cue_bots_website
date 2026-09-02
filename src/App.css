@@ -3,6 +3,31 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  
+  a, button, input, select, textarea {
+    cursor: none !important;
+  }
+}
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background-color: var(--home-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.loading-logo {
+  width: 120px;
+  height: auto;
+}
+
 body,
 #root {
   background-color: transparent;

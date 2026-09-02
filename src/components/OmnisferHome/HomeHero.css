@@ -140,6 +140,7 @@
 .homehero-btn-secondary {
   background: transparent;
   color: #fff;
+  text-decoration: none;
   border-color: rgba(255, 255, 255, 0.2);
 }
 

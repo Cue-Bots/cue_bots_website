@@ -322,7 +322,7 @@
   
   
   .dropdown-menu a:hover {
-    background: #000000;
+    /* background: #000000; */
     color: #232526;
     font-weight: 600;
     text-shadow: none;
