@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './OmnisferHomePage.css';
 
-import LoadingLogo from '../components/assets/Omnisfer/FaviconOmnisfer.png';
+import LoadingLogo from '../assets/Omnisfer/FaviconOmnisfer.png';
 
 import CustomCursor from '../components/Common/CustomCursor';
 import HomeNavbar from '../components/Common/HomeNavbar';

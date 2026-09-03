@@ -1,11 +1,11 @@
 import './HomeProducts.css';
 import { CircleTwoTone, WidgetsTwoTone, PrecisionManufacturingTwoTone, NavigateNextTwoTone } from '@mui/icons-material';
-import kneecap from '../assets/Omnisfer/ARC_D.png';
-import kneecapHover from '../assets/Omnisfer/ARC_shop.png';
-import Claw from '../assets/Omnisfer/Claw2_D.png';
-import ClawHover from '../assets/Omnisfer/Claw2_shop.png';
-import botkit from '../assets/Omnisfer/homescreen_light_shop_D.png';
-import botkitHover from '../assets/Omnisfer/homescreen_light_shop.png';
+import kneecap from '../../assets/Omnisfer/ARC_D.png';
+import kneecapHover from '../../assets/Omnisfer/ARC_shop.png';
+import Claw from '../../assets/Omnisfer/Claw2_D.png';
+import ClawHover from '../../assets/Omnisfer/Claw2_shop.png';
+import botkit from '../../assets/Omnisfer/homescreen_light_shop_D.png';
+import botkitHover from '../../assets/Omnisfer/homescreen_light_shop.png';
 
 const products = [
   {

@@ -1,15 +1,15 @@
 import './HomeHero.css';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import robotVideo from '../assets/Omnisfer/output.webm';
-import robotVideoIOS from '../assets/Omnisfer/output.mov';
-import robotReverseVideo from '../assets/Omnisfer/output_r.webm';
-import robotReverseVideoIOS from '../assets/Omnisfer/output_r.mov';
+import robotVideo from '../../assets/Omnisfer/output.webm';
+import robotVideoIOS from '../../assets/Omnisfer/output.mov';
+import robotReverseVideo from '../../assets/Omnisfer/output_r.webm';
+import robotReverseVideoIOS from '../../assets/Omnisfer/output_r.mov';
 
 const isIOSDevice = typeof navigator !== 'undefined'
   && (/iPad|iPhone|iPod/.test(navigator.userAgent)
     || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
 
-const logoContext = require.context('../assets/carrousel', false, /\.(png|jpe?g|svg|webp)$/i);
+const logoContext = require.context('../../assets/carrousel', false, /\.(png|jpe?g|svg|webp)$/i);
 
 const logoEntries = logoContext.keys().sort().map((logoPath) => ({
   src: logoContext(logoPath),

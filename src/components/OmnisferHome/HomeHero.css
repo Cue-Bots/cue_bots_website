@@ -29,7 +29,7 @@ html, body {
   --homehero-soft: rgba(255, 255, 255, 0.4);
   --homehero-border: rgba(255, 255, 255, 0.12);
   /* background-image: linear-gradient(rgba(0, 0, 0, 0.178), rgba(0, 0, 0, 0.13)),url('../assets/Omnisfer/homescreen_light_v2_5_v.png'); */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.078), rgba(0, 0, 0, 0.03)),url('../assets/Omnisfer/homepage_ring_wall_v2.png');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.078), rgba(0, 0, 0, 0.03)),url('../../assets/Omnisfer/homepage_ring_wall_v2.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: right center;
@@ -325,7 +325,7 @@ html, body {
   }
 
   .homehero-section {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.178), rgba(0, 0, 0, 0.274)),url('../assets/Omnisfer/homepage_ring_wall_m.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.178), rgba(0, 0, 0, 0.274)),url('../../assets/Omnisfer/homepage_ring_wall_m.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: right center;

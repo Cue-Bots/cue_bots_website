@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import logo from '../assets/Omnisfer/Omnisfer_logo.png';
+import logo from '../../assets/Omnisfer/Omnisfer_logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarsStaggered, faChevronDown, faTimes } from '@fortawesome/free-solid-svg-icons';
 import './HomeNavbar.css';

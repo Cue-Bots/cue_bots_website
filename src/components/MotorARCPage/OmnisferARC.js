@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import kneecap from '../assets/Omnisfer/ARC_DD.png';
+import kneecap from '../../assets/Omnisfer/ARC_DD.png';
 import './OmnisferARC.css';
 
 
