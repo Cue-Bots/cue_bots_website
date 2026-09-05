@@ -105,20 +105,23 @@ export default function HomeHero() {
       return;
     }
 
+    setIsReverseVisible(true);
     playbackModeRef.current = 'reverse';
     videoPositionRef.current = 'reverse';
-    reverseVideo.currentTime = 0;
-    setIsReverseVisible(true);
 
-    const playPromise = reverseVideo.play();
+    setTimeout(() => {
+      reverseVideo.currentTime = 0;
 
-    if (playPromise && typeof playPromise.catch === 'function') {
-      playPromise.catch(() => {
-        playbackModeRef.current = 'idle';
-        videoPositionRef.current = 'end';
-        setIsReverseVisible(false);
-      });
-    }
+      const playPromise = reverseVideo.play();
+
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          playbackModeRef.current = 'idle';
+          videoPositionRef.current = 'end';
+          setIsReverseVisible(false);
+        });
+      }
+    }, 50);
   };
 
   const startForwardPlayback = () => {
@@ -128,16 +131,16 @@ export default function HomeHero() {
       return;
     }
 
-    playbackModeRef.current = 'forward';
-    videoPositionRef.current = 'forward';
-    setIsReverseVisible(false);
-
-    video.currentTime = 0;
+    video.currentTime = 0.001;
 
     const playPromise = video.play();
 
-    if (playPromise && typeof playPromise.catch === 'function') {
-      playPromise.catch(() => {
+    if (playPromise && typeof playPromise.then === 'function') {
+      playPromise.then(() => {
+        playbackModeRef.current = 'forward';
+        videoPositionRef.current = 'forward';
+        setIsReverseVisible(false);
+      }).catch(() => {
         videoPositionRef.current = 'start';
         playbackModeRef.current = 'idle';
       });
@@ -152,15 +155,12 @@ export default function HomeHero() {
       return undefined;
     }
 
-    // 1. Force le navigateur à initialiser la vidéo (très utile sur mobile)
     video.load();
     if (reverseVideo) {
       reverseVideo.load();
     }
 
     const handleLoadedMetadata = () => {
-      // 2. LE HACK IOS : on demande la milliseconde 1 au lieu de 0
-      // Cela force Safari/Chrome mobile à "dessiner" la frame à l'écran
       video.currentTime = 0.001; 
       videoPositionRef.current = 'start';
     };
@@ -180,7 +180,6 @@ export default function HomeHero() {
       if (reverseVideo) {
         reverseVideo.pause();
       }
-      // On remet aussi à 0.001 à la fin du reverse pour être sûr
       videoPositionRef.current = 'start';
       video.currentTime = 0.001; 
       playbackModeRef.current = 'idle';

@@ -69,6 +69,8 @@ html, body {
 }
 
 .homehero-background-video--hidden {
+  opacity: 0;
+  pointer-events: none;
   visibility: hidden;
 }
 
