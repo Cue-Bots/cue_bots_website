@@ -81,7 +81,7 @@ export default function CustomCursor() {
 
     // 2. Quand la souris entre dans un élément interactif
     const handleMouseOver = (e) => {
-      const target = e.target.closest('button, a, input, textarea');
+      const target = e.target.closest('button, a, input, textarea, label');
       activeElement.current = target;
       
       const mouseX = lastMousePos.current.x !== -100 ? lastMousePos.current.x : e.clientX;
@@ -97,7 +97,7 @@ export default function CustomCursor() {
       // Le pointeur a 'pointerEvents: none', donc document.elementFromPoint passe au travers 
       // et récupère le VRAI élément situé sous la souris (qui n'a pas bougée physiquement)
       const el = document.elementFromPoint(mouseX, mouseY);
-      const target = el?.closest('button, a, input, textarea');
+      const target = el?.closest('button, a, input, textarea, label');
 
       // Met à jour la référence et recalcule la position en direct !
       activeElement.current = target;

@@ -134,6 +134,18 @@ html, body, #root {
   background: rgba(255, 255, 255, 0.1);
 }
 
+html.light {
+  color-scheme: light;
+  --home-bg: #e5e0de;
+  --home-surface: rgba(23, 24, 26, 0.05);
+  --home-surface-strong: rgba(23, 24, 26, 0.08);
+  --home-border: rgba(23, 24, 26, 0.14);
+  --home-text: #2d2c2c;
+  --home-text-muted: #4f575c;
+  --home-text-soft: #6a747b;
+  --home-element: #d1c6bc;
+}
+
 @media (max-width: 768px) {
   .home-container {
     width: min(1440px, calc(100% - 20px));
