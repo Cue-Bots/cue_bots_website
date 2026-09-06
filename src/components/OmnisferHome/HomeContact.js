@@ -1,5 +1,5 @@
 import './HomeContact.css';
-import { Email, Send } from '@mui/icons-material';
+import { Send } from '@mui/icons-material';
 
 export default function HomeContact() {
   return (
