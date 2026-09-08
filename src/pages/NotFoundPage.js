@@ -2,7 +2,7 @@ import React from 'react';
 // import logo from '../assets/Omnisfer/Omnisfer_logo.png';
 import HomeNavbar from '../components/Common/HomeNavbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTriangleExclamation, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import './NotFoundPage.css';
 
 const NotFound = () => {
