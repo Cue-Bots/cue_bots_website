@@ -9,32 +9,16 @@ const NotFound = () => {
   return (
     <div className="notfound-container">
         <HomeNavbar />
-        {/* Effets de lueur en arrière-plan */}
         <div className="glow-orb glow-orb-1"></div>
         <div className="glow-orb glow-orb-2"></div>
-
         <div className="notfound-content">
-
-
-            {/* Code d'erreur géant & Badge */}
             <div className="error-code-wrapper">
-            <span className="error-code">404</span>
-            <div className="error-badge">
-                <FontAwesomeIcon icon={faTriangleExclamation} /> Lost Trajectory
+                <span className="error-code">404</span>
             </div>
-            </div>
-
-            {/* Titre & Description */}
             <h1>Page not found.</h1>
-            <p>
-            The page you are trying to reach seems to have strayed from the flight plan or does not exist in our system.
-            </p>
-
-            {/* Bouton de retour */}
+            <p>The page you are trying to reach seems to have strayed from the flight plan or does not exist in our system.</p>
             <div className="action-box">
-            <a href="/" className="home-btn">
-                <FontAwesomeIcon icon={faArrowLeft} /> Return to Home
-            </a>
+                <a href="/" className="home-btn"><FontAwesomeIcon icon={faArrowLeft} /> Return to Home </a>
             </div>
         </div>
     </div>
