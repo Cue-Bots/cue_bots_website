@@ -16,7 +16,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 import './BuildPage.css';
 
-// const Construction = () => {
+const Construction = () => {
 //   const [email, setEmail] = useState('');
 //   const [submitted, setSubmitted] = useState(false);
 
