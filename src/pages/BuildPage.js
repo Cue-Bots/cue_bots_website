@@ -10,23 +10,22 @@ import React, { useState } from 'react';
 // import logo from '../assets/Omnisfer/Omnisfer_logo.png';
 
 import EmailTwoToneIcon from '@mui/icons-material/EmailTwoTone';
-import RocketLaunchTwoToneIcon from '@mui/icons-material/RocketLaunchTwoTone';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import XIcon from '@mui/icons-material/X';
+// import GitHubIcon from '@mui/icons-material/GitHub';
+// import XIcon from '@mui/icons-material/X';
 
 import './BuildPage.css';
 
-const Construction = () => {
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+// const Construction = () => {
+//   const [email, setEmail] = useState('');
+//   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (email) {
-      setSubmitted(true);
-    }
-  };
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     if (email) {
+//       setSubmitted(true);
+//     }
+//   };
 
   return (
     <div className="construction-container">
