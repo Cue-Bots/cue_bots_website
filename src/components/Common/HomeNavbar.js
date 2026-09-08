@@ -4,14 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarsStaggered, faChevronDown, faTimes } from '@fortawesome/free-solid-svg-icons';
 import './HomeNavbar.css';
 
-
 const NavBar = () => {
   const [hideMenu] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [openMobileDropdown, setOpenMobileDropdown] = useState(null);
   const [menuIconColor, setMenuIconColor] = useState('white');
-  const [dropdownDark, setDropdownDark] = useState(true); // true = texte clair, false = texte foncé
+  const [dropdownDark, setDropdownDark] = useState(true); 
   const [mobileDropdownDark, setMobileDropdownDark] = useState(true);
   const menuRef = useRef();
   const langRef = useRef();
@@ -39,7 +38,7 @@ const NavBar = () => {
       });
 
       setMenuIconColor(lightSection ? 'black' : 'white');
-      setDropdownDark(!lightSection); // Si light-bg, texte foncé
+      setDropdownDark(!lightSection);
       setMobileDropdownDark(!lightSection);
     };
 
@@ -74,11 +73,8 @@ const NavBar = () => {
 
   const menuData = [
     {
-      name: 'Technologies',
-      options: [
-        { name: 'AI', href: '#technologies-ai' },
-        { name: 'IoT', href: '#technologies-iot' }
-      ]
+      name: 'Vision',
+      href: '/vision'
     },
     {
       name: 'Products',
@@ -86,36 +82,45 @@ const NavBar = () => {
         {
           name: 'Hardware',
           options: [
-            { name: 'Robots', href: '#products-hardware-robots' },
-            { name: 'motors', href: '#products-hardware-motors' }
+            { name: 'Robots', href: '/bots' },
+            { name: 'ARC Motors', href: '/arc' }
           ]
         },
         {
           name: 'Software',
           options: [
-            { name: 'Logiciel', href: '#products-software-logiciel' },
+            { name: 'MIA', href: '/mia' },
           ]
         }
+      ]
+    },
+    {
+      name: 'Technologies',
+      options: [
+        { name: 'AI', href: '#technologies-ai' },
+        { name: 'IoT', href: '#technologies-iot' }
       ]
     },
     {
       name: 'Applications',
-      subcategories: [
-        {
-          name: 'Usine',
-          options: [
-            { name: 'Usine1', href: '#applications-usine1' },
-            { name: 'Usine2', href: '#applications-usine2' }
-          ]
-        }
+      options: [
+        { name: 'Industry 4.0 / Factories', href: '/Factories' },
+        { name: 'Autonomous Logistics', href: '/autonomous-logistics' },
+        { name: 'Research & R&D', href: '/research-and-development' }
       ]
     },
     {
-      name: 'Socials',
+      name: 'Compagny',
       options: [
-        { name: 'LinkedIn', href: '#socials-linkedin' },
-        { name: 'Instagram', href: '#socials-instagram' }
+        { name: 'About Us', href: '/about' },
+        { name: 'News', href: '/news' },
+        { name: 'Press', href: '/press' },
+        { name: 'Newletters', href: '/newletters' },
       ]
+    },
+    {
+      name: 'Contact us',
+      href: '#contact'
     }
   ];
 
@@ -128,30 +133,34 @@ const NavBar = () => {
 
       <div className='NavbarForm'>
         <ul className={`NavbarText ${hideMenu ? 'is-hidden' : ''}`} ref={menuRef}>
-          <li><a href="#about" style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>Vision</a></li>
           {menuData.map((cat) => (
-            <li className='dropdown' key={cat.name} onMouseLeave={closeDropdownOnMouseLeave}>
-              <a href={`#${cat.name}`} onClick={(e) => { e.preventDefault(); toggleDropdown(cat.name); }}>
-                {cat.name} <FontAwesomeIcon icon={faChevronDown} />
-              </a>
-              {openDropdown === cat.name && (
-                <div className='dropdown-menu'>
-                  {cat.subcategories ? cat.subcategories.map(sub => (
-                    <div key={sub.name}>
-                      <div style={{fontWeight:'bold',marginTop:'5px', color: dropdownDark ? '#d2d2d2' : '#232526'}}>{sub.name}</div>
-                      {sub.options.map(opt => (
-                        <a key={opt.name} href={opt.href} style={{color: dropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
-                      ))}
-                    </div>
-                  )) : null}
-                  {cat.options ? cat.options.map(opt => (
-                    <a key={opt.name} href={opt.href} style={{color: dropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
-                  )) : null}
-                </div>
-              )}
-            </li>
+            cat.href ? (
+              <li key={cat.name}>
+                <a href={cat.href} style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{cat.name}</a>
+              </li>
+            ) : (
+              <li className='dropdown' key={cat.name} onMouseLeave={closeDropdownOnMouseLeave}>
+                <a href={`#${cat.name}`} onClick={(e) => { e.preventDefault(); toggleDropdown(cat.name); }}>
+                  {cat.name} <FontAwesomeIcon icon={faChevronDown} />
+                </a>
+                {openDropdown === cat.name && (
+                  <div className='dropdown-menu'>
+                    {cat.subcategories ? cat.subcategories.map(sub => (
+                      <div key={sub.name}>
+                        <div style={{fontWeight:'bold',marginTop:'5px', color: dropdownDark ? '#d2d2d2' : '#232526'}}>{sub.name}</div>
+                        {sub.options.map(opt => (
+                          <a key={opt.name} href={opt.href} style={{color: dropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
+                        ))}
+                      </div>
+                    )) : null}
+                    {cat.options ? cat.options.map(opt => (
+                      <a key={opt.name} href={opt.href} style={{color: dropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
+                    )) : null}
+                  </div>
+                )}
+              </li>
+            )
           ))}
-          <li><a href="#contact" style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>Contact us</a></li>
         </ul>
 
         <div className='NavbarLangWrapper' ref={langRef}>
@@ -166,35 +175,39 @@ const NavBar = () => {
       </div>
 
       <div className={`mobile-menu ${mobileMenuOpen ? 'slide-in' : 'slide-out'}`}>
-      <div className="mobile-menu-close" onClick={toggleMobileMenu}>
-        <FontAwesomeIcon icon={faTimes} />
-      </div>
+        <div className="mobile-menu-close" onClick={toggleMobileMenu}>
+          <FontAwesomeIcon icon={faTimes} />
+        </div>
         <ul>
           {menuData.map((cat) => (
             <li key={cat.name}>
-              <div className="mobile-dropdown-toggle" onClick={() => toggleMobileDropdown(cat.name)}>
-                <span style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{cat.name}</span>
-                <FontAwesomeIcon icon={faChevronDown} style={{color: mobileDropdownDark ? '#fff' : '#232526'}} />
-              </div>
-              {openMobileDropdown === cat.name && (
-                <ul className="dropdown-menu">
-                  {cat.subcategories ? cat.subcategories.map(sub => (
-                    <li key={sub.name}>
-                      <div style={{fontWeight:'bold',marginTop:'5px', color: mobileDropdownDark ? '#d2d2d2' : '#232526'}}>{sub.name}</div>
-                      {sub.options.map(opt => (
-                        <a key={opt.name} href={opt.href} style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
-                      ))}
-                    </li>
-                  )) : null}
-                  {cat.options ? cat.options.map(opt => (
-                    <li key={opt.name}><a href={opt.href} style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{opt.name}</a></li>
-                  )) : null}
-                </ul>
+              {cat.href ? (
+                <a href={cat.href} style={{color: mobileDropdownDark ? '#fff' : '#232526'}} onClick={toggleMobileMenu}>{cat.name}</a>
+              ) : (
+                <>
+                  <div className="mobile-dropdown-toggle" onClick={() => toggleMobileDropdown(cat.name)}>
+                    <span style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{cat.name}</span>
+                    <FontAwesomeIcon icon={faChevronDown} style={{color: mobileDropdownDark ? '#fff' : '#232526'}} />
+                  </div>
+                  {openMobileDropdown === cat.name && (
+                    <ul className="dropdown-menu">
+                      {cat.subcategories ? cat.subcategories.map(sub => (
+                        <li key={sub.name}>
+                          <div style={{fontWeight:'bold',marginTop:'5px', color: mobileDropdownDark ? '#d2d2d2' : '#232526'}}>{sub.name}</div>
+                          {sub.options.map(opt => (
+                            <a key={opt.name} href={opt.href} style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{opt.name}</a>
+                          ))}
+                        </li>
+                      )) : null}
+                      {cat.options ? cat.options.map(opt => (
+                        <li key={opt.name}><a href={opt.href} style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>{opt.name}</a></li>
+                      )) : null}
+                    </ul>
+                  )}
+                </>
               )}
             </li>
           ))}
-          <li><a href="#about" style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>About us</a></li>
-          <li><a href="#contact" style={{color: mobileDropdownDark ? '#fff' : '#232526'}}>Contact us</a></li>
         </ul>
       </div>
     </div>

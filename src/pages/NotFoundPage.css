@@ -1,0 +1,124 @@
+.notfound-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0b0c10;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 20px;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
+.glow-orb {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.glow-orb-1 {
+  top: -100px;
+  left: -100px;
+  background-color: #cfad97;
+}
+
+.glow-orb-2 {
+  bottom: -100px;
+  right: -100px;
+  background-color: #cfba97;
+}
+
+/* Contenu principal centré */
+.notfound-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  Margin: 10% 0px 10% 0px;
+  padding: 0% 0px 0% 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notfound-logo img {
+  height: 45px;
+  object-fit: contain;
+  margin-bottom: 25px;
+}
+
+/* Affichage 404 stylé */
+.error-code-wrapper {
+  margin-bottom: 20px;
+}
+
+.error-code {
+  font-size: clamp(5rem, 12vw, 8rem);
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, #ffffff 30%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.04em;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.error-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Typographie */
+.notfound-content h1 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 15px;
+  letter-spacing: -0.02em;
+}
+
+.notfound-content p {
+  color: #9ca3af;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 35px;
+  max-width: 500px;
+}
+
+/* Bouton de retour */
+.action-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+/* Footer */
+.notfound-footer {
+  position: relative;
+  z-index: 1;
+  font-size: 0.8rem;
+  color: #6b7280;
+  letter-spacing: 0.3px;
+}

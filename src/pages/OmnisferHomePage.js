@@ -4,7 +4,6 @@ import './OmnisferHomePage.css';
 
 import LoadingLogo from '../assets/Omnisfer/FaviconOmnisfer.png';
 
-import CustomCursor from '../components/Common/CustomCursor';
 import HomeNavbar from '../components/Common/HomeNavbar';
 import HomeHero from '../components/OmnisferHome/HomeHero';
 import HomeAbout from '../components/OmnisferHome/HomeAbout';
@@ -48,8 +47,6 @@ export default function Home() {
 
   return (
     <>
-      <CustomCursor />
-
       <AnimatePresence>
         {isLoading && (
           <motion.div 
